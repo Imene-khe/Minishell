@@ -1,4 +1,4 @@
-#  Minishell
+# 🐚 Minishell
 
 <div align="center">
 
@@ -14,21 +14,21 @@ _Reproduire le comportement de Bash avec les fonctionnalités essentielles d'un 
 
 ---
 
-##  Table des Matières
+## 📋 Table des Matières
 
-- [ À Propos du Projet](#-à-propos-du-projet)
-- [Fonctionnalités](#-fonctionnalités)
-- [Architecture](#️-architecture)
-- [Installation](#️-installation)
-- [Utilisation](#-utilisation)
-- [Tests](#-tests)
-- [Contraintes Techniques](#-contraintes-techniques)
-- [Contribution](#-contribution)
-- [Licence](#-licence)
+- [🎯 À Propos du Projet](#-à-propos-du-projet)
+- [✨ Fonctionnalités](#-fonctionnalités)
+- [🏗️ Architecture](#️-architecture)
+- [🛠️ Installation](#️-installation)
+- [🚀 Utilisation](#-utilisation)
+- [🧪 Tests](#-tests)
+- [📚 Contraintes Techniques](#-contraintes-techniques)
+- [🤝 Contribution](#-contribution)
+- [📜 Licence](#-licence)
 
 ---
 
-## À Propos du Projet
+## 🎯 À Propos du Projet
 
 **Minishell** est une implémentation simplifiée d'un interpréteur de commandes Unix, développée dans le cadre du cursus de l'École 42. Ce projet reproduit les fonctionnalités essentielles de Bash, permettant d'exécuter des commandes, gérer les pipes, les redirections et les variables d'environnement.
 
@@ -42,54 +42,54 @@ _Reproduire le comportement de Bash avec les fonctionnalités essentielles d'un 
 
 ---
 
-## Fonctionnalités
+## ✨ Fonctionnalités
 
-### Interface Utilisateur
+### 🖥️ Interface Utilisateur
 
--  **Prompt interactif** avec affichage personnalisé
--  **Historique des commandes** fonctionnel
--  **Gestion des signaux** : `Ctrl+C`, `Ctrl+D`, `Ctrl+\`
+- ✅ **Prompt interactif** avec affichage personnalisé
+- ✅ **Historique des commandes** fonctionnel
+- ✅ **Gestion des signaux** : `Ctrl+C`, `Ctrl+D`, `Ctrl+\`
 
-###  Exécution de Commandes
+### 🔧 Exécution de Commandes
 
-- **Recherche d'exécutables** via `PATH` ou chemins absolus/relatifs
-- **Variables d'environnement** : expansion `$VAR` et `$?`
-- **Gestion des quotes** : simples `'` et doubles `"`
+- ✅ **Recherche d'exécutables** via `PATH` ou chemins absolus/relatifs
+- ✅ **Variables d'environnement** : expansion `$VAR` et `$?`
+- ✅ **Gestion des quotes** : simples `'` et doubles `"`
 
-###  Pipes et Redirections
+### 🔗 Pipes et Redirections
 
-- **Pipes** : `cmd1 | cmd2 | cmd3`
-- **Redirections d'entrée** : `cmd < fichier`
-- **Redirections de sortie** : `cmd > fichier`
-- **Mode append** : `cmd >> fichier`
-- **Heredoc** : `cmd << delimiteur`
+- ✅ **Pipes** : `cmd1 | cmd2 | cmd3`
+- ✅ **Redirections d'entrée** : `cmd < fichier`
+- ✅ **Redirections de sortie** : `cmd > fichier`
+- ✅ **Mode append** : `cmd >> fichier`
+- ✅ **Heredoc** : `cmd << delimiteur`
 
-### Commandes Intégrées (Builtins)
+### 🏠 Commandes Intégrées (Builtins)
 
-- `echo` avec option `-n`
-- `cd` avec chemins relatifs/absolus
-- `pwd` sans options
-- `export` sans options
-- `unset` sans options
-- `env` sans options
-- `exit` sans options
+- ✅ `echo` avec option `-n`
+- ✅ `cd` avec chemins relatifs/absolus
+- ✅ `pwd` sans options
+- ✅ `export` sans options
+- ✅ `unset` sans options
+- ✅ `env` sans options
+- ✅ `exit` sans options
 
 ---
 
-##  Architecture
+## 🏗️ Architecture
 
 Le projet suit une **architecture modulaire** avec séparation claire des responsabilités :
 
 ```
 src/
-├── lexer/          # Analyse lexicale (tokenisation)
-├── parser/         # Analyse syntaxique (AST)
-├── expander/       # Expansion des variables
-├── executor/       # Exécution des commandes
-├── builtins/       # Commandes intégrées
-├── environment/    # Variables d'environnement
-├── signals/        # Gestion des signaux
-└── utils/          # Fonctions utilitaires
+├── lexer/          # 🔤 Analyse lexicale (tokenisation)
+├── parser/         # 🏗️ Analyse syntaxique (AST)
+├── expander/       # 🔄 Expansion des variables
+├── executor/       # ⚡ Exécution des commandes
+├── builtins/       # 🏠 Commandes intégrées
+├── environment/    # 🌐 Variables d'environnement
+├── signals/        # 🔔 Gestion des signaux
+└── utils/          # 🛠️ Fonctions utilitaires
 ```
 
 ### Pipeline d'Exécution
@@ -112,7 +112,7 @@ graph LR
 
 ---
 
-## Installation
+## 🛠️ Installation
 
 ### Prérequis
 
@@ -142,7 +142,7 @@ make re
 
 ---
 
-## Utilisation
+## 🚀 Utilisation
 
 ### Lancement du Shell
 
@@ -187,7 +187,7 @@ minishell$ exit
 
 ---
 
-## Tests
+## 🧪 Tests
 
 ### Tests Manuels
 
@@ -214,7 +214,7 @@ bash --posix -c "votre_commande"
 
 ---
 
-## Contraintes Techniques
+## 📚 Contraintes Techniques
 
 ### Fonctions Autorisées
 
@@ -231,30 +231,30 @@ tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
 
 ### Norme 42
 
-- **Norminette** : Respect strict des règles de codage
-- **Gestion mémoire** : Aucune fuite mémoire (sauf readline)
-- **Variable globale unique** : Une seule variable globale pour les signaux
-- **Fonctions limitées** : Maximum 25 lignes par fonction
+- ✅ **Norminette** : Respect strict des règles de codage
+- ✅ **Gestion mémoire** : Aucune fuite mémoire (sauf readline)
+- ✅ **Variable globale unique** : Une seule variable globale pour les signaux
+- ✅ **Fonctions limitées** : Maximum 25 lignes par fonction
 
 ### Limitations
 
-- Pas d'interprétation des quotes non fermées
-- Pas de gestion des caractères spéciaux `\` et `;`
-- Pas d'expansion des wildcards `*`
+- ❌ Pas d'interprétation des quotes non fermées
+- ❌ Pas de gestion des caractères spéciaux `\` et `;`
+- ❌ Pas d'expansion des wildcards `*`
 
 ---
 
-## Contribution
+## 🤝 Contribution
 
 Ce projet a été développé en binôme dans le cadre du cursus 42. Les contributions externes ne sont pas acceptées, mais n'hésitez pas à :
 
-- **Signaler des bugs** via les issues
-- **Suggérer des améliorations** de documentation
-- **Mettre une étoile** si le projet vous plaît !
+- 🐛 **Signaler des bugs** via les issues
+- 📖 **Suggérer des améliorations** de documentation
+- ⭐ **Mettre une étoile** si le projet vous plaît !
 
 ---
 
-## Licence
+## 📜 Licence
 
 Ce projet est développé dans le cadre pédagogique de l'École 42. Utilisation libre pour l'apprentissage.
 

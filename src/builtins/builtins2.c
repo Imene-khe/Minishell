@@ -6,43 +6,50 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 19:55:35 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 14:12:23 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+void	print_env(t_exec *ex);
+
 void    env(t_tree *args, t_exec *ex, int count, int *run)
 {
-	t_env	*curr;
-
-	ex->in_env = 1;
+	ex->shell->status = 0;
 	if (!ex->shell->envp)
 		return (env_errors(ex->shell, NULL));
 	else if (count_elm(args, ARG) >= 1)
 	{
+		ex->in_env = 1;
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
 			return (env_errors(ex->shell, args->content));
 		else
 			ex->in_env = exec_cmd(args, ex, count, run);
 		if (ex->in_env == 1)
 			env_errors(ex->shell, args->content);
+		ex->in_env = 0;
 	}
 	else
+		print_env(ex);
+}
+
+void	print_env(t_exec *ex)
+{
+	t_env	*curr;
+
+	curr = ex->shell->envp;
+	while (curr)
 	{
-		curr = ex->shell->envp;
-		while (curr)
-		{
-			if (curr->value)
-				printf("%s=%s\n", curr->name, curr->value);
-			curr = curr->next;
-		}
+		if (curr->value)
+			printf("%s=%s\n", curr->name, curr->value);
+		curr = curr->next;
 	}
-	ex->in_env = 0;
 }
 
 void	unset(t_tree *arg, t_shell *shell)
 {
+	shell->status = 0;
 	if (!arg)
 		return ;
 	if (arg->content[0] == '-' && ft_strlen(arg->content) > 1)
@@ -54,10 +61,11 @@ void	unset(t_tree *arg, t_shell *shell)
 		env_delete(shell->envp, env_find(shell->envp, arg->content));
 }
 
-void	export(t_tree *args, t_shell *shell)
+void	export(t_tree *args, t_shell *shell, t_exec *ex)
 {
+	shell->status = 0;
 	if (!args && shell->envp)
-		export_noargs(shell);
+		export_noargs(shell, ex);
 	else if (args)
 	{
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
@@ -71,13 +79,13 @@ void	export(t_tree *args, t_shell *shell)
 			printf("minishishishi: export: not a valid identifier\n");
 		}
 		else
-			export_args(args, shell);
+			export_args(args, shell, ex);
 	}
 }
 
 void	exit_built(t_tree *args, t_exec *ex, int *run)
 {
-	char			*first;
+	char	*first;
 
 	if (!(ex->need_pipe))
 	{

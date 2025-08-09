@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:24:53 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 14:07:38 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 14:13:00 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	ft_isallalnum(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] && ft_isalnum(str[i]))
+	while (str[i] && (str[i] == '_' || ft_isalnum(str[i])))
 		i++;
 	if (str[i])
-		return (1);
-	return (0);
+		return (0);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:29 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 14:18:45 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 14:06:37 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*find_smallest(t_env *env, t_env **selected, int i);
 void	print_export(t_env	*sorted_envp, t_shell *shell);
 void	verify_export(t_tree *curr, t_shell *shell, char *name);
 
-void	export_noargs(t_shell *shell)
+void	export_noargs(t_shell *shell, t_exec *ex)
 {
 	t_env	*sorted_envp;
 	t_env	*smallest;
@@ -27,7 +27,7 @@ void	export_noargs(t_shell *shell)
 	size = env_size(shell->envp);
 	selected = malloc(sizeof(t_env *) * size);
 	if (!selected)
-		return (shell->status = 1, print_error("Malloc failed", "export"));
+		return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
 	i = 0;
 	sorted_envp = NULL;
 	while (i < size)
@@ -80,7 +80,7 @@ void	print_export(t_env *sorted_envp, t_shell *shell)
 	}
 }
 
-void	export_args(t_tree *args, t_shell *shell)
+void	export_args(t_tree *args, t_shell *shell, t_exec *ex)
 {
 	t_tree	*curr;
 	char	*name;
@@ -91,10 +91,9 @@ void	export_args(t_tree *args, t_shell *shell)
 	{
 		name = NULL;
 		size = until_sep(curr->content, '=');
-		if (size)
-			name = ft_strndup(curr->content, size);
+		name = ft_strndup(curr->content, size);
 		if (!name)
-			return (shell->status = 1, print_error("Malloc failed", "export"));
+			return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
 		verify_export(curr, shell, name);
 		free(name);
 		curr = curr->right;
