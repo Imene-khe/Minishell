@@ -14,7 +14,7 @@ _Reproduire le comportement de Bash avec les fonctionnalités essentielles d'un 
 
 ---
 
-## 📋 Table des Matières
+##  Table des Matières
 
 - [ À Propos du Projet](#-à-propos-du-projet)
 - [Fonctionnalités](#-fonctionnalités)
@@ -56,7 +56,7 @@ _Reproduire le comportement de Bash avec les fonctionnalités essentielles d'un 
 - **Variables d'environnement** : expansion `$VAR` et `$?`
 - **Gestion des quotes** : simples `'` et doubles `"`
 
-### 🔗 Pipes et Redirections
+###  Pipes et Redirections
 
 - **Pipes** : `cmd1 | cmd2 | cmd3`
 - **Redirections d'entrée** : `cmd < fichier`
@@ -187,7 +187,7 @@ minishell$ exit
 
 ---
 
-## 🧪 Tests
+## Tests
 
 ### Tests Manuels
 
