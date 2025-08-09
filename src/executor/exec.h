@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:53:05 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/07 14:18:09 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 16:40:11 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,26 @@
 
 // Exec
 t_exec	*init_exec(t_tree *tree, t_exec *exec, t_shell *shell);
-int	    pre_exec(t_tree *tree, t_exec *ex, int *run);
+int		pre_exec(t_tree *tree, t_exec *ex, int *run);
 int		exec(t_tree *tree, t_exec *ex, int count, int *run);
 void	free_shell(t_shell *shell);
 
 // Cmnds
 int		exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run);
 
-// Redirs
+// Redir
 int		try_open(t_tree *tree, t_exec *ex, int *in, int *out);
+
+// Pipe
+void	manage_pipes(t_tree *tree, t_exec *ex, int *run);
+void	reset_pipe(t_exec *ex, int which);
+void	set_fds(t_exec *ex, int count);
+void	pair_pipe(t_exec *ex, int count, int pipe1[2], int pipe2[2]);
 
 // Execution
 void	waiting(t_tree *tree, t_exec *ex);
 void	execution(t_exec *ex, int fds[2], char **cmnd, char **env);
 void	dups(t_exec *ex, int fd, int fds[2], int dupped);
-int 	need_fork(t_exec *ex, t_tree *tree);
+int		need_fork(t_exec *ex, t_tree *tree);
 
 #endif

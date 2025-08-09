@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:39:04 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/02 18:59:17 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:47:56 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	nothing(char *str)
 	int		i;
 	int		char_nb;
 	char	c;
+
 	i = 0;
 	char_nb = 0;
 	c = 0;
@@ -47,7 +48,7 @@ int	only_spaces(char *str)
 	return (1);
 }
 
-static void ignore_quote(char *s, int *i, int which, int *count)
+static void	ignore_quote(char *s, int *i, int which, int *count)
 {
 	*count = -*count;
 	*i += 1;
@@ -86,11 +87,11 @@ int	closed(char *str)
 int	is_sep(const char *str)
 {
 	if (str[0] != '|' && str[0] != '<' && str[0] != '>'
-			&& ft_strncmp(str, "<<", 2) != 0
-			&& ft_strncmp(str, ">>", 2) != 0)
+		&& ft_strncmp(str, "<<", 2) != 0
+		&& ft_strncmp(str, ">>", 2) != 0)
 		return (0);
 	if (!ft_strncmp(str, "<<", 2)
-			|| !ft_strncmp(str, ">>", 2))
+		|| !ft_strncmp(str, ">>", 2))
 		return (2);
 	return (1);
 }

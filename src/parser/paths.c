@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:15:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/01 14:17:34 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:43:35 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**parse_for_paths(t_env *env, t_exec *ex)
 	char	**paths;
 
 	curr = env;
-	while(curr && ft_strcmp(curr->name, "PATH"))
+	while (curr && ft_strcmp(curr->name, "PATH"))
 		curr = curr->next;
 	if (!curr)
 		return (ft_putstr_fd("No Paths", 2), NULL);

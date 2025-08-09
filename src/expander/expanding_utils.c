@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:17:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/01 14:17:11 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:29:30 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	till_sep(char *str)
 
 	i = 0;
 	while (str[i] && str[i] != ' ' && str[i] != '$'
-			&& str[i] != '\'' && str[i] != '\"' && str[i] != '='
-			&& str[i] != '\\' && str[i] != '/')
+		&& str[i] != '\'' && str[i] != '\"' && str[i] != '='
+		&& str[i] != '\\' && str[i] != '/')
 		i++;
 	return (i);
 }

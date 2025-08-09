@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trees2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 17:31:22 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/21 14:20:18 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:53:01 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,3 @@ int	in_tree(char *str, t_tree *tree)
 	}
 	return (0);
 }
-
-

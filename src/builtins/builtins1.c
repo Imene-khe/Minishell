@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 14:01:44 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 16:19:43 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,17 @@ void	cd(t_tree *args, t_exec *ex)
 	old = getcwd(old, PATH_SIZE);
 	if (!old)
 		return (cd_errors(ex->shell, NULL, 1));
-	if (count_elm(args, ARG) == 0 || (count_elm(args, ARG) == 1 && !ft_strcmp(args->content, "~")))
+	if (cd_verify(args))
 	{
 		val = ft_getenv(ex->shell->envp, "HOME");
 		if (!val || chdir(val) == -1)
-			return (free(old), ex->shell->status = 1, ft_putstr_fd("cd: HOME not set\n", 2));
+			return (free(old), cd_errors(ex->shell, "HOME", 2));
 	}
 	else if (count_elm(args, ARG) == 1 && !ft_strcmp(args->content, "-"))
 	{
 		val = ft_getenv(ex->shell->envp, "OLDPWD");
 		if (!val || chdir(val) == -1)
-			return (free(old), ex->shell->status = 1, ft_putstr_fd("cd: OLDPWD not set\n", 2));
+			return (free(old), cd_errors(ex->shell, "OLDPWD", 2));
 	}
 	else if (chdir(args->content) == -1)
 		return (free(old), cd_errors(ex->shell, args->content, 0));

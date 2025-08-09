@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/18 17:37:59 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:47:02 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static char	*custom_cpytillsep(char const *s, char c, int ignore)
 	return (str);
 }
 
-int  custom_countwords(char *str, char sep)
+int	custom_countwords(char *str, char sep)
 {
-	int count;
-	int i;
-	int words;
+	int	count;
+	int	i;
+	int	words;
 
 	count = 1;
 	i = -1;

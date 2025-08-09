@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 12:41:23 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/23 17:07:20 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 16:23:57 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ t_env	*env_new(char *var)
 	return (new);
 }
 
-void    env_add_back(t_env **head, t_env *new)
+void	env_add_back(t_env **head, t_env *new)
 {
-	t_env  *current;
+	t_env	*current;
 
 	if (!new)
 		return ;
@@ -77,6 +77,7 @@ t_env	*env_find(t_env *head, char *name)
 	}
 	return (NULL);
 }
+
 int	env_size(t_env *env)
 {
 	int		size;

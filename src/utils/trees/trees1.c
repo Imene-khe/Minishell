@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trees.c                                            :+:      :+:    :+:   */
+/*   trees1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:54:46 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/20 14:55:05 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:52:07 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,6 @@ void	free_tree(t_tree *tree)
 	free(tree);
 }
 
-void	print_tree(t_tree *node, int depth)
-{
-    if (!node)
-        return;
-    // Affiche le sous-arbre droit en premier (pour avoir la racine à gauche)
-    print_tree(node->right, depth + 1);
-
-    // Affiche la racine avec des tabs selon la profondeur
-    for (int i = 0; i < depth; i++)
-        printf("\t");
-    printf("%s\n", node->content); // adapte selon le champ à afficher
-
-    // Affiche le sous-arbre gauche
-    print_tree(node->left, depth + 1);
-}
-
 int	count_elm(t_tree *tree, int type)
 {
 	int	count;
@@ -87,11 +71,7 @@ int	count_elm(t_tree *tree, int type)
 	if (tree->right)
 		count += count_elm(tree->right, type);
 	if (tree->type == type)
-	{
-		// if (type == CMD && !ft_strcmp(tree->content, "env"))
-		// 	count++;
 		count++;
-	}
 	return (count);
 }
 

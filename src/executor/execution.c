@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:51:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 19:18:02 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 16:34:00 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ int	need_fork(t_exec *ex, t_tree *tree)
 	curr = tree;
 	while (curr && curr->type != CMD)
 		curr = curr->left;
-	if (curr && ft_strcmp(curr->content, "cd") && ft_strcmp(curr->content, "unset")
-		&& ft_strcmp(curr->content, "export") && ft_strcmp(curr->content, "exit")
-		&& ft_strcmp(curr->content, "env") && ft_strcmp(curr->content, "pwd")
+	if (curr && ft_strcmp(curr->content, "cd")
+		&& ft_strcmp(curr->content, "unset")
+		&& ft_strcmp(curr->content, "export")
+		&& ft_strcmp(curr->content, "exit")
+		&& ft_strcmp(curr->content, "env")
+		&& ft_strcmp(curr->content, "pwd")
 		&& ft_strcmp(curr->content, "echo"))
 		return (1);
 	return (0);

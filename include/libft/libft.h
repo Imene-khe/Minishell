@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:58:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 14:07:34 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 15:48:07 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void		ft_putnbrbase_fd(unsigned int n, char *base, int fd);
 void		ft_putchar_counts(char c, int *charcount);
 void		ft_putstr_counts(char *s, int *charcount);
 void		ft_putnbr_counts(int n, int *charcount);
-void		ft_putnbrbase_counts(uintptr_t n, char *base, int *charcount, int iter);
+void		ft_putnbrbase_counts(uintptr_t n, char *base,
+				int *charcount, int iter);
 int			ft_printf(const char *str, ...);
 char		*get_next_line(int fd);
 char		*altered_ft_strjoin(char *s1, char const *s2);
