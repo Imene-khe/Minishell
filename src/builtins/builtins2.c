@@ -1,0 +1,100 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
+/*   Updated: 2025/08/08 19:55:35 by bguerrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "builtins.h"
+
+void    env(t_tree *args, t_exec *ex, int count, int *run)
+{
+	t_env	*curr;
+
+	ex->in_env = 1;
+	if (!ex->shell->envp)
+		return (env_errors(ex->shell, NULL));
+	else if (count_elm(args, ARG) >= 1)
+	{
+		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
+			return (env_errors(ex->shell, args->content));
+		else
+			ex->in_env = exec_cmd(args, ex, count, run);
+		if (ex->in_env == 1)
+			env_errors(ex->shell, args->content);
+	}
+	else
+	{
+		curr = ex->shell->envp;
+		while (curr)
+		{
+			if (curr->value)
+				printf("%s=%s\n", curr->name, curr->value);
+			curr = curr->next;
+		}
+	}
+	ex->in_env = 0;
+}
+
+void	unset(t_tree *arg, t_shell *shell)
+{
+	if (!arg)
+		return ;
+	if (arg->content[0] == '-' && ft_strlen(arg->content) > 1)
+	{
+		shell->status = 1;
+		printf("minishishishi: unset: no options managed\n");
+	}
+	else
+		env_delete(shell->envp, env_find(shell->envp, arg->content));
+}
+
+void	export(t_tree *args, t_shell *shell)
+{
+	if (!args && shell->envp)
+		export_noargs(shell);
+	else if (args)
+	{
+		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
+		{
+			shell->status = 1;
+			printf("minishishishi: export: no options managed\n");
+		}
+		else if (!ft_isallalnum(args->content))
+		{
+			shell->status = 1;
+			printf("minishishishi: export: not a valid identifier\n");
+		}
+		else
+			export_args(args, shell);
+	}
+}
+
+void	exit_built(t_tree *args, t_exec *ex, int *run)
+{
+	char			*first;
+
+	if (!(ex->need_pipe))
+	{
+		*run = 0;
+		ft_putstr_fd("exit\n", 2);
+	}
+	if (count_elm(args, ARG) >= 1)
+	{
+		first = args->content;
+		if (!ft_isalldigit(first) || too_big(first, ft_strlen(first)))
+			exit_errors(first);
+		else if (count_elm(args, ARG) > 1)
+		{
+			exit_errors(NULL);
+			*run = 1;
+		}
+		else
+			ex->shell->status = ft_atoll(first) % 256;
+	}
+}
