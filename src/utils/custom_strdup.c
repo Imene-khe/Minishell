@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   custom_strdup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 12:46:54 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/09 16:52:34 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:45:33 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,12 @@ static int	check_quotes(char c, int *ignore, int *type)
 	return (1);
 }
 
-char	*custom_strdup(const char *s)
+char	*custom_strdup(const char *s, int ignore, int type)
 {
 	size_t		slen;
 	char		*dup;
 	size_t		i;
 	size_t		j;
-	int			ignore;
-	int			type;
 
 	slen = ft_strlen(s);
 	dup = ft_calloc(sizeof(char), slen + 1);
@@ -44,8 +42,6 @@ char	*custom_strdup(const char *s)
 		return (NULL);
 	i = 0;
 	j = 0;
-	ignore = 0;
-	type = 0;
 	while (i < slen)
 	{
 		if (check_quotes(s[i], &ignore, &type))

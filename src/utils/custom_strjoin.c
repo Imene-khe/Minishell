@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:44:40 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 13:03:30 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:46:02 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	len_val(char *s1, char *s2, char *str, t_shell *shell)
 {
 	char	*tmp;
 	int		ret;
-	
+
 	tmp = NULL;
 	if (!ft_strcmp(s2, "?"))
 	{
@@ -60,7 +60,7 @@ int	len_val(char *s1, char *s2, char *str, t_shell *shell)
 	else
 	{
 		ret = ft_strlen(s1) + ft_strlen(str) - ft_strlen(s2)
-		+ ft_strlen(ft_getenv(shell->envp, s2));
+			+ ft_strlen(ft_getenv(shell->envp, s2));
 	}
 	return (ret);
 }

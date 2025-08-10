@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 14:12:23 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 16:22:26 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_env(t_exec *ex);
 
-void    env(t_tree *args, t_exec *ex, int count, int *run)
+void	env(t_tree *args, t_exec *ex, int count, int *run)
 {
 	ex->shell->status = 0;
 	if (!ex->shell->envp)

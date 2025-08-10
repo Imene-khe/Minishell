@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 12:42:32 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:29:05 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*expand(char *str, t_shell *shell)
 	mode = 0;
 	while (str[i])
 	{
-		if (!change_mode(str[i], &mode) && str[i] == '$' && till_sep(str + i + 1) && mode != 1)
+		if (expand_verify(str, i, mode))
 		{
 			expanded = replacing(expanded, str, &i, shell);
 			if (!expanded)
@@ -52,4 +52,12 @@ char	*expand(char *str, t_shell *shell)
 			expanded[j++] = str[i++];
 	}
 	return (expanded);
+}
+
+int	expand_verify(char *str, int i, int mode)
+{
+	if (!change_mode(str[i], &mode) && str[i] == '$'
+		&& till_sep(str + i + 1) && mode != 1)
+		return (1);
+	return (0);
 }

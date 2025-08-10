@@ -6,15 +6,15 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 12:34:30 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 17:52:32 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:48:30 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int until_sep(char *str, char sep)
+int	until_sep(char *str, char sep)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] && str[i] != sep)
@@ -77,5 +77,3 @@ int	too_big(char *str, int size)
 		return (1);
 	return (0);
 }
-
-

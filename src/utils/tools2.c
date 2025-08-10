@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:54:08 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/25 16:18:04 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:48:08 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	arr_size(char **arr)
 	return (count);
 }
 
-char **ft_arrdup(char **arr, int size)
+char	**ft_arrdup(char **arr, int size)
 {
 	char	**dup;
 	int		i;

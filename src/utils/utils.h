@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/03 16:35:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/07 17:03:49 by bguerrou         ###   ########.fr       */
+/*   Created: 2025/08/09 17:48:57 by bguerrou          #+#    #+#             */
+/*   Updated: 2025/08/09 17:49:28 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPLIT_H
-# define SPLIT_H
+#ifndef UTILS_H
+# define UTILS_H
 
 # include "../../include/minishell.h"
 
@@ -33,10 +33,10 @@ char	**ft_arrdup(char **arr, int size);
 int		until_sep(char *str, char sep);
 char	**cmnd_split(char *path, t_tree *args, t_exec *ex);
 void	modify_var(t_exec *ex, char *name, char *value, char *other);
-int 	too_big(char *str, int size);
+int		too_big(char *str, int size);
 
 // Custom Strdup
-char	*custom_strdup(const char *s);
+char	*custom_strdup(const char *s, int ignore, int type);
 
 // Custom strjoin
 char	*custom_strjoin(char *s1, char *s2, char *str, t_shell *shell);
@@ -46,6 +46,6 @@ char	*new_strjoin(char *s1, char *s2);
 void	free_structs(t_tree *tree, t_exec *ex, int s);
 void	free_shell(t_shell *shell);
 void	free_exec(t_exec *exec);
-void    close_fds(int *fds);
+void	close_fds(int *fds);
 
 #endif
