@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 18:54:09 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 14:01:44 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	builtins(t_tree *tree, t_exec *ex, int count, int *run)
 	if (!ft_strcmp(tree->content, "unset"))
 		return (unset(tree->right, ex->shell), 1);
 	if (!ft_strcmp(tree->content, "export"))
-		return (export(tree->right, ex->shell), 1);
+		return (export(tree->right, ex->shell, ex), 1);
 	if (!ft_strcmp(tree->content, "exit"))
 		return (exit_built(tree->right, ex, run), 1);
 	return (0);
@@ -78,6 +78,7 @@ void	cd(t_tree *args, t_exec *ex)
 	char	*old;
 	char	*val;
 
+	ex->shell->status = 0;
 	if (count_elm(args, ARG) > 1)
 		return (cd_errors(ex->shell, NULL, 0));
 	old = NULL;

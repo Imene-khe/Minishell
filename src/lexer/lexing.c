@@ -3,14 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   lexing.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/22 15:13:19 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 12:40:18 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+
+t_line	*lexer_next(char **split, int *t, int *s, t_shell *shell);
+int		check_type(char *str, int *t, int *s, int interpret);
+t_line	*subsplit(char *str, int *t, int *s, int *j);
+
+t_line	*lexer(char *prompt, t_shell *shell)
+{
+	t_line	*head;
+	char	**split;
+	int		t;
+	int		s;
+
+	split = custom_split(prompt, ' ');
+	if (!split)
+		return (NULL);
+	t = 0;
+	s = 0;
+	head = lexer_next(split, &t, &s, shell);
+	free_arr(split, custom_countwords(prompt, ' '));
+	if (!head)
+		return (NULL);
+	return (head);
+}
+
+t_line	*lexer_next(char **split, int *t, int *s, t_shell *shell)
+{
+	t_line	*head;
+	t_line	*current;
+	int		i;
+	int		j;
+	char	*expanded;
+
+	i = -1;
+	j = 0;
+	head = NULL;
+	while (split[++i])
+	{
+		expanded = expand(split[i], shell);
+		if (!expanded)
+			return (line_free(head), NULL);
+		if (ft_countwords(expanded, ' ') <= 1 || *s)
+			current = line_new(expanded, check_type(expanded, t, s, 1), j++);
+		else
+			current = subsplit(expanded, t, s, &j);
+		free(expanded);
+		if (!current)
+			return (line_free(head), NULL);
+		line_add_back(&head, &current);
+	}
+	return (head);
+}
 
 int	check_type(char *str, int *t, int *s, int interpret)
 {
@@ -56,51 +107,4 @@ t_line	*subsplit(char *str, int *t, int *s, int *j)
 	}
 	free_arr(subsplit, ft_countwords(str, ' '));
 	return (new);
-}
-
-t_line	*lexer_next(char **split, int *t, int *s, t_shell *shell)
-{
-	t_line	*head;
-	t_line	*current;
-	int		i;
-	int		j;
-	char	*expanded;
-
-	i = -1;
-	j = 0;
-	head = NULL;
-	while (split[++i])
-	{
-		expanded = expand(split[i], shell);
-		if (!expanded)
-			return (line_free(head), NULL);
-		if (ft_countwords(expanded, ' ') <= 1 || *s)
-			current = line_new(expanded, check_type(expanded, t, s, 1), j++);
-		else
-			current = subsplit(expanded, t, s, &j);
-		free(expanded);
-		if (!current)
-			return (line_free(head), NULL);
-		line_add_back(&head, &current);
-	}
-	return (head);
-}
-
-t_line	*lexer(char *prompt, t_shell *shell)
-{
-	t_line	*head;
-	char	**split;
-	int		t;
-	int		s;
-
-	split = custom_split(prompt, ' ');
-	if (!split)
-		return (NULL);
-	t = 0;
-	s = 0;
-	head = lexer_next(split, &t, &s, shell);
-	free_arr(split, custom_countwords(prompt, ' '));
-	if (!head)
-		return (NULL);
-	return (head);
 }

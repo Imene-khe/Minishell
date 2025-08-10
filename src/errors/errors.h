@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/12 12:24:53 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 14:13:00 by bguerrou         ###   ########.fr       */
+/*   Created: 2025/07/17 13:44:10 by bguerrou          #+#    #+#             */
+/*   Updated: 2025/08/08 19:32:04 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ERRORS_H
+# define ERRORS_H
 
-int	ft_isalnum(int c)
-{
-	if (ft_isdigit(c) || ft_isalpha(c))
-		return (1);
-	return (0);
-}
+# include "../../include/minishell.h"
 
-int	ft_isallalnum(char *str)
-{
-	int	i;
+void	clear_exit(t_tree *tree, t_exec *ex, int code, char *source);
+void	print_error(char *msg, char *source);
+void	line_errors(t_line *line, int code);
+void	cd_errors(t_shell *shell, char *file, int cwd);
+void	exit_errors(char *arg);
+void	env_errors(t_shell *shell, char *arg);
 
-	i = 0;
-	while (str[i] && (str[i] == '_' || ft_isalnum(str[i])))
-		i++;
-	if (str[i])
-		return (0);
-	return (1);
-}
+#endif
