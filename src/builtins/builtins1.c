@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 16:19:43 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:30:13 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,22 @@ int	builtins(t_tree *tree, t_exec *ex, int count, int *run)
 void	echo(t_tree *args, t_exec *ex)
 {
 	char	*strarg;
+	t_tree	*curr;
 
 	if (args)
 	{
 		strarg = NULL;
-		if (!ft_strcmp(args->content, "-n"))
-			strarg = tree_to_str(args->right, strarg, 0);
-		else
-			strarg = tree_to_str(args, strarg, 0);
+		curr = args;
+		while (curr && curr->content[0] == '-'
+			&& is_allchar(curr->content + 1, 'n'))
+			curr = curr->right;
+		strarg = tree_to_str(curr, strarg, 0);
 		if (strarg)
 		{
 			printf("%s", strarg);
 			free(strarg);
 		}
-		if (ft_strcmp(args->content, "-n"))
+		if (ft_strcmp(args->content, "-n") && curr == args)
 			printf("\n");
 	}
 	else

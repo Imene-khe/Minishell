@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 16:22:26 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:10:21 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,7 @@ void	export(t_tree *args, t_shell *shell, t_exec *ex)
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
 		{
 			shell->status = 1;
-			printf("minishishishi: export: no options managed\n");
-		}
-		else if (!ft_isallalnum(args->content))
-		{
-			shell->status = 1;
-			printf("minishishishi: export: not a valid identifier\n");
+			ft_putstr_fd("minishishishi: export: no options managed\n", 2);
 		}
 		else
 			export_args(args, shell, ex);

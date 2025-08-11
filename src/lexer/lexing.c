@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:42:55 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:28:31 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_line	*subsplit(char *str, int *t, int *s, int *j)
 	int		i;
 	char	**subsplit;
 
-	subsplit = ft_split(str, ' ');
+	subsplit = custom_split(str, ' ');
 	if (!subsplit)
 		return (NULL);
 	new = NULL;

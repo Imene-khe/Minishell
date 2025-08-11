@@ -1,11 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/11 23:30:50 by bguerrou          #+#    #+#             */
+/*   Updated: 2025/08/11 23:34:11 by bguerrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SIGNALS_H
 # define SIGNALS_H
 
 # include <signal.h>
-extern int  g_signal;
-void        setup_signals_interactive(void);
+# include "signals.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <unistd.h>
+# include <sys/wait.h>
+
+extern int	g_signal;
+
+int		g_signal = 0;
+
+void	setup_signals_interactive(void);
 void	setup_signals_child(void);
 int		interpret_wait_status(int wstatus);
-
 
 #endif

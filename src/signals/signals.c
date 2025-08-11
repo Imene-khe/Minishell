@@ -1,10 +1,16 @@
-#include "signals.h"
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <unistd.h>
-#include <sys/wait.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/11 23:30:55 by bguerrou          #+#    #+#             */
+/*   Updated: 2025/08/11 23:33:57 by bguerrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int	g_signal = 0;
+#include "signals.h"
 
 static void	sigint_interactive(int signo)
 {
@@ -35,19 +41,18 @@ void	setup_signals_child(void)
 
 int	interpret_wait_status(int wstatus)
 {
+	int	sig;
+
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));
 	if (WIFSIGNALED(wstatus))
 	{
-		int	sig = WTERMSIG(wstatus);
-
+		sig = WTERMSIG(wstatus);
 		if (sig == SIGQUIT)
 			write(2, "Quit\n", 5);
 		else if (sig == SIGINT)
 			write(2, "\n", 1);
 		return (128 + sig);
-        // pour le recup et savoir on arrete notre truc avec quelle manip
 	}
 	return (0);
 }
-

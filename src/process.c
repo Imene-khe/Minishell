@@ -6,14 +6,14 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:09:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 12:29:49 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:22:44 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 void	prep_exec(t_tree *tree, int *run, t_shell *shell);
-int		verify_line(t_line *line);
+int		verify_line(t_line *line, t_line *head, int prio);
 
 void	treatment(char *prompt, int *run, t_shell *shell)
 {
@@ -28,7 +28,7 @@ void	treatment(char *prompt, int *run, t_shell *shell)
 		if (!line)
 			return (free_shell(shell),
 				print_error("Malloc failed", "lexer"), exit(1));
-		if (!verify_line(line))
+		if (!verify_line(line, line, 2))
 			return (line_free(line));
 		tree = transform(line, 3, line_size(line), -1);
 		line_free(line);
@@ -62,23 +62,28 @@ void	prep_exec(t_tree *tree, int *run, t_shell *shell)
 	free_structs(tree, ex, 0);
 }
 
-int	verify_line(t_line *line)
+int	verify_line(t_line *line, t_line *head, int prio)
 {
 	int	ret;
 
+	if (!line && prio != 1)
+		return (verify_line(head, head, prio - 1));
 	if (!line)
 		return (1);
 	ret = 1;
-	if (line->type == PIPE)
+	if (prio == 2 && line->type == PIPE)
 	{
 		if (line->nb == 0 && line->type == PIPE)
 			return (line_errors(line, 1), 0);
 		if (!line->next)
 			return (line_errors(line, 2), 0);
 	}
-	if (line->type == REDIR_IN || line->type == REDIR_OUT)
+	if (prio == 2 && (line->type == REDIR_IN || line->type == REDIR_OUT))
 		if ((line->next && line->next->type != FILE) || !line->next)
 			return (line_errors(line->next, 1), 0);
-	ret = verify_line(line->next);
+	if (prio == 1 && line->type == CMD)
+		if (is_dir(line->content))
+			return (line_errors(line, 3), 0);
+	ret = verify_line(line->next, head, prio);
 	return (ret);
 }

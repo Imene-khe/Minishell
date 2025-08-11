@@ -6,13 +6,12 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:52:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 22:48:43 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:27:53 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "../signals/signals.h"
-
 
 t_exec	*init_exec(t_tree *tree, t_exec *exec, t_shell *shell)
 {

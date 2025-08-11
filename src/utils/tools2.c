@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:54:08 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:48:08 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:29:43 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,26 @@ char	**ft_arrdup(char **arr, int size)
 		i++;
 	}
 	return (dup);
+}
+
+int	is_dir(const char *cmd)
+{
+	int	i;
+	int	slash;
+	int	dot;
+
+	i = -1;
+	slash = 0;
+	dot = 0;
+	while (cmd[++i])
+	{
+		if (cmd[i] == '/')
+			slash++;
+		if (cmd[i] == '.')
+			dot++;
+	}
+	if ((slash == i || (dot == 1 && i == 1)
+			|| slash + dot == i) && i > 0)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:29 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 14:06:37 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:11:28 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,14 @@ void	export_args(t_tree *args, t_shell *shell, t_exec *ex)
 		name = ft_strndup(curr->content, size);
 		if (!name)
 			return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
+		if (!ft_isallalnum(name))
+		{
+			shell->status = 1;
+			ft_putstr_fd("minishishishi: ", 2);
+			ft_putstr_fd(name, 2);
+			ft_putstr_fd(": not a valid identifier\n", 2);
+			return (free(name));
+		}
 		verify_export(curr, shell, name);
 		free(name);
 		curr = curr->right;

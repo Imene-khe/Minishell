@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 22:47:34 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:28:06 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,3 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	close(pip[1]);
 	return (free(buff), pip[0]);
 }
-
-
-

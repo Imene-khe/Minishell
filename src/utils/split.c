@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:47:02 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:30:27 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,15 @@ int	custom_countwords(char *str, char sep)
 	while (str[++i])
 	{
 		if (is_sep(str + i) || (count == 1 && str[i] != sep))
+		{
 			words++;
+			count = 0;
+		}
 		if ((count == 0 && str[i] == sep) || is_sep(str + i))
 			count = 1;
-		else if (count == 1 && str[i] != sep)
-		{
-			count = 0;
-			if (is_quote(str[i]))
-				while (str[++i] && !is_quote(str[i]))
-					i = i + 0;
-		}
+		if (is_quote(str[i]))
+			while (str[++i] && !is_quote(str[i]))
+				i = i + 0;
 	}
 	return (words);
 }
