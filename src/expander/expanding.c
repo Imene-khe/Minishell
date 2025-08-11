@@ -6,11 +6,13 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:29:05 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:07:58 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
+
+int	expand_verify(char *str, int i, int mode);
 
 char	*replacing(char *expanded, char *str, int *i, t_shell *shell)
 {

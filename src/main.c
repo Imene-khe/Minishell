@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 16:55:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:53:26 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:07:18 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	next(t_shell *shell)
 	while (run)
 	{
 		prompt = readline("minishishishi > ");
-		if (!prompt)
-			return (print_error("Malloc failed", "readline"), 1);
+		/*if (!prompt)
+			return (print_error("Malloc failed", "readline"), 1);*/
 		if (!only_spaces(prompt) && ft_strlen(prompt) > 0)
 			treatment(prompt, &run, shell);
 	}
