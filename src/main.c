@@ -34,13 +34,35 @@ int	main(int argc, char **argv, char **envp)
 	free_shell(shell);
 	return (exit_code);
 }
+int next(t_shell *shell)
+{
+    int   run;
+    char *prompt;
 
-int	next(t_shell *shell)
+    setup_signals_interactive();
+    run = 1;
+    while (run)
+    {
+        prompt = readline("minishishishi > ");
+        if (!prompt)
+		{
+            write(1, "exit\n", 5);
+            break;
+        }
+        if (only_spaces(prompt) || ft_strlen(prompt) == 0) {
+            free(prompt);
+            continue;
+        }
+        treatment(prompt, &run, shell);
+    }
+    return (shell->status);
+}
+/*int	next(t_shell *shell)
 {
 	int	run;
 	char	*prompt;
 
-	run = 1;
+	run = 1; // win nzid 9samha
 	while (run)
 	{
 		prompt = readline("minishishishi > ");
@@ -51,7 +73,7 @@ int	next(t_shell *shell)
 	}
 	
 	return (shell->status);
-}
+}*/
 /*int	next(t_shell *shell)
 {
 	int	run;
