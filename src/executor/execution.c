@@ -6,11 +6,12 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:51:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 16:34:00 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 22:48:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "../signals/signals.h"
 
 void	waiting(t_tree *tree, t_exec *ex)
 {
@@ -29,6 +30,7 @@ void	waiting(t_tree *tree, t_exec *ex)
 				ex->shell->status = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 				ex->shell->status = 128 + WTERMSIG(status);
+			ex->shell->status = interpret_wait_status(status);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 16:39:51 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 22:47:34 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	int		pip[2];
 	char	*buff;
 
-	buff = NULL;
 	if (pipe(pip) < 0)
 		clear_exit(tree, ex, 1, "pipe");
+	buff = NULL;
 	while (ft_strcmp(buff, tree->right->content) != 0)
 	{
 		if (buff)
@@ -101,8 +101,11 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 		}
 		buff = readline("> ");
 		if (!buff)
-			clear_exit(tree, ex, 0, "heredoc");
+			return (ex->shell->status = 130, close(pip[1]), free(buff), -1);
 	}
 	close(pip[1]);
 	return (free(buff), pip[0]);
 }
+
+
+
