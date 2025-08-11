@@ -28,7 +28,8 @@ SRCS = $(addprefix src/, \
 						environment/env2.c \
 						environment/env3.c \
 						utils/trees/trees1.c \
-						utils/trees/trees2.c)
+						utils/trees/trees2.c \
+						signals/signals.c)
 
 OBJS = $(SRCS:src/%.c=objs/%.o)
 
