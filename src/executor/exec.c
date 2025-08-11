@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:52:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/08 19:46:56 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/10 20:12:57 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include "../signals/signals.h"
+
 
 void	manage_pipes(t_tree *tree, t_exec *ex, int *run);
 void	reset_pipe(t_exec *ex, int which);
@@ -56,7 +58,10 @@ int	pre_exec(t_tree *tree, t_exec *ex, int *run)
 		if (ex->pid[count] == -1)
 			clear_exit(ex->tree, ex, 2, "fork()");
 		if (ex->pid[count] == 0)
+		{
+			setup_signals_child();
 			exec(tree, ex, count, run);
+		}
 		else
 			reset_pipe(ex, count);
 	}

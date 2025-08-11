@@ -6,12 +6,12 @@
 /*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 16:55:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 19:44:11 by mac              ###   ########.fr       */
+/*   Updated: 2025/08/10 20:12:33 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "signals.h"
+#include "signals/signals.h"
 
 pid_t	g_signal_pid;
 
@@ -55,7 +55,7 @@ int	next(t_shell *shell)
 			}
 		if (!only_spaces(prompt) && ft_strlen(prompt) > 0)
 			treatment(prompt, &run, shell);
-		free (prompt)
+		free (prompt);
 	}
 	
 	return (shell->status);

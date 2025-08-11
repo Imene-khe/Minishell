@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/06 12:11:23 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/10 20:08:01 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 			tmp_fd = open(tree->right->content, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
 			tmp_fd = open(tree->right->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (tmp_fd == -1)
+			return (0);
 		if (tmp_fd < 0)
 			return (print_error("Cannot open file", tree->right->content), 0);
 		assign_fd(ex, out, 1, tmp_fd);
@@ -84,21 +86,24 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	int		pip[2];
 	char	*buff;
 
-	buff = NULL;
 	if (pipe(pip) < 0)
 		clear_exit(tree, ex, 1, "pipe");
+	buff = NULL;
 	while (ft_strcmp(buff, tree->right->content) != 0)
 	{
 		if (buff)
 		{
-			if (write(pip[1], buff, ft_strlen(buff)) < 0 || write(pip[1], "\n", 1) < 0)
-				return (free(buff), close_fds(pip), clear_exit(tree, ex, 1, "write"), -1);
+			write(pip[1], buff, ft_strlen(buff));
+			write(pip[1], "\n", 1);
 			free(buff);
 		}
 		buff = readline("> ");
 		if (!buff)
-			clear_exit(tree, ex, 0, "heredoc");
+			return (ex->shell->status = 130, close(pip[1]), free(buff), -1);
 	}
 	close(pip[1]);
 	return (free(buff), pip[0]);
 }
+
+
+
