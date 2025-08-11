@@ -35,19 +35,18 @@ void	setup_signals_child(void)
 
 int	interpret_wait_status(int wstatus)
 {
+	int	sig;
+
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));
 	if (WIFSIGNALED(wstatus))
 	{
-		int	sig = WTERMSIG(wstatus);
-
+		sig = WTERMSIG(wstatus);
 		if (sig == SIGQUIT)
 			write(2, "Quit\n", 5);
 		else if (sig == SIGINT)
 			write(2, "\n", 1);
 		return (128 + sig);
-        // pour le recup et savoir on arrete notre truc avec quelle manip
 	}
 	return (0);
 }
-

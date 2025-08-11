@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   trees.c                                            :+:      :+:    :+:   */
+/*   trees1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 14:54:46 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/20 14:55:05 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:05:07 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,7 @@ int	count_elm(t_tree *tree, int type)
 	if (tree->right)
 		count += count_elm(tree->right, type);
 	if (tree->type == type)
-	{
-		// if (type == CMD && !ft_strcmp(tree->content, "env"))
-		// 	count++;
 		count++;
-	}
 	return (count);
 }
 

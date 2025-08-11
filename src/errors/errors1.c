@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 13:40:32 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 16:04:00 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,14 @@ void	line_errors(t_line *line, int code)
 	}
 	if (code == 2)
 		ft_putstr_fd("Uncompleted pipe\n", 2);
+	if (code == 3)
+	{
+		ft_putstr_fd(line->content, 2);
+		if (!ft_strcmp(line->content, "."))
+			ft_putstr_fd(": filename argument required\n", 2);
+		else
+			ft_putstr_fd(": Is a directory\n", 2);
+	}
 }
 
 void	cmnd_errors(char *cmnd)

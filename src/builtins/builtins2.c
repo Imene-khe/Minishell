@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 14:12:23 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:10:57 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,7 @@ void	export(t_tree *args, t_shell *shell, t_exec *ex)
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
 		{
 			shell->status = 1;
-			printf("minishishishi: export: no options managed\n");
-		}
-		else if (!ft_isallalnum(args->content))
-		{
-			shell->status = 1;
-			printf("minishishishi: export: not a valid identifier\n");
+			ft_putstr_fd("minishishishi: export: no options managed\n", 2);
 		}
 		else
 			export_args(args, shell, ex);
@@ -87,7 +82,7 @@ void	exit_built(t_tree *args, t_exec *ex, int *run)
 {
 	char	*first;
 
-	if (!(ex->need_pipe))
+	if (!ex || !(ex->need_pipe))
 	{
 		*run = 0;
 		ft_putstr_fd("exit\n", 2);

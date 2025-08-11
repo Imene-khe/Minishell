@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/18 17:37:59 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:53:22 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,15 @@ int  custom_countwords(char *str, char sep)
 	while (str[++i])
 	{
 		if (is_sep(str + i) || (count == 1 && str[i] != sep))
+		{
 			words++;
+			count = 0;
+		}
 		if ((count == 0 && str[i] == sep) || is_sep(str + i))
 			count = 1;
-		else if (count == 1 && str[i] != sep)
-		{
-			count = 0;
-			if (is_quote(str[i]))
-				while (str[++i] && !is_quote(str[i]))
-					i = i + 0;
-		}
+		if (is_quote(str[i]))
+			while (str[++i] && !is_quote(str[i]))
+				i = i + 0;
 	}
 	return (words);
 }
@@ -85,7 +84,7 @@ static char	**ft_alloc(char const *s, char c, char **split)
 		if (s[i] != c)
 		{
 			split[j++] = custom_cpytillsep(s + i, c, 0);
-			if (!split)
+			if (!split[j - 1])
 				return (free_arr(split, j), NULL);
 			if (is_sep(s + i))
 				i += is_sep(s + i);

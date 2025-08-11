@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:39:04 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/02 18:59:17 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:22:19 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ int	closed(char *str)
 	{
 		if (is_quote(str[i]) == 1)
 			ignore_quote(str, &i, 1, &single_quote);
-		if (is_quote(str[i]) == 2)
+		if (str[i] && is_quote(str[i]) == 2)
 			ignore_quote(str, &i, 2, &double_quote);
-		if (is_quote(str[i]) == 0)
+		if (str[i] && is_quote(str[i]) == 0)
 			i++;
 	}
 	if (single_quote < 0 || double_quote < 0)

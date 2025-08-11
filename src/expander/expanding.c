@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 12:42:32 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 17:04:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,17 @@ char	*replacing(char *expanded, char *str, int *i, t_shell *shell)
 	return (expanded);
 }
 
-char	*expand(char *str, t_shell *shell)
+char	*expand(char *str, t_shell *shell, int mode)
 {
 	char	*expanded;
 	int		i;
 	int		j;
-	int		mode;
 
 	expanded = ft_calloc(sizeof(char), ft_strlen(str) + 1);
 	if (!expanded)
 		return (NULL);
 	i = 0;
 	j = 0;
-	mode = 0;
 	while (str[i])
 	{
 		if (!change_mode(str[i], &mode) && str[i] == '$' && till_sep(str + i + 1) && mode != 1)

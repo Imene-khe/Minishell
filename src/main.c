@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 16:55:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/10 20:12:33 by mac              ###   ########.fr       */
+/*   Updated: 2025/08/11 17:04:19 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,46 +34,23 @@ int	main(int argc, char **argv, char **envp)
 	free_shell(shell);
 	return (exit_code);
 }
-int next(t_shell *shell)
+int	next(t_shell *shell)
 {
-    int   run;
-    char *prompt;
-
-    setup_signals_interactive();
-    run = 1;
-    while (run)
-    {
-        prompt = readline("minishishishi > ");
-        if (!prompt)
-		{
-            write(1, "exit\n", 5);
-            break;
-        }
-        if (only_spaces(prompt) || ft_strlen(prompt) == 0) {
-            free(prompt);
-            continue;
-        }
-        treatment(prompt, &run, shell);
-    }
-    return (shell->status);
-}
-/*int	next(t_shell *shell)
-{
-	int	run;
+	int		run;
 	char	*prompt;
 
-	run = 1; // win nzid 9samha
+	setup_signals_interactive();
+	run = 1;
 	while (run)
 	{
 		prompt = readline("minishishishi > ");
 		if (!prompt)
-			return (print_error("Malloc failed", "readline"), 1);
-		if (!only_spaces(prompt) && ft_strlen(prompt) > 0)
+			exit_built(NULL, NULL, &run);
+		if (run && !only_spaces(prompt) && ft_strlen(prompt) > 0)
 			treatment(prompt, &run, shell);
 	}
-	
 	return (shell->status);
-}*/
+}
 /*int	next(t_shell *shell)
 {
 	int	run;

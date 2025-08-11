@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:35:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/07 17:03:49 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 15:34:08 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		is_sep(const char *str);
 int		is_quote(char c);
 int		arr_size(char **arr);
 char	**ft_arrdup(char **arr, int size);
+int	    is_dir(const char *cmd);
 
 // Tools 3
 int		until_sep(char *str, char sep);
