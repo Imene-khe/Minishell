@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/11 14:14:57 by bguerrou          #+#    #+#             */
+/*   Updated: 2025/08/11 14:15:05 by bguerrou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "signals.h"
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -23,6 +35,7 @@ static void	ignore_handler(int signo)
 void	setup_signals_interactive(void)
 {
 	struct sigaction	sa;
+
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sa.sa_handler = sigint_interactive;
