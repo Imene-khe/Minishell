@@ -6,11 +6,13 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 23:30:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 23:33:57 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:47:49 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signals.h"
+
+int	g_signal = 0;
 
 static void	sigint_interactive(int signo)
 {

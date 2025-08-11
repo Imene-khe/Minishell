@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 23:10:21 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:49:31 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	exit_built(t_tree *args, t_exec *ex, int *run)
 {
 	char	*first;
 
-	if (!(ex->need_pipe))
+	if (!ex || !(ex->need_pipe))
 	{
 		*run = 0;
 		ft_putstr_fd("exit\n", 2);

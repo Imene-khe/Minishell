@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 23:30:50 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 23:34:11 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/11 23:41:46 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <sys/wait.h>
 
 extern int	g_signal;
-
-int		g_signal = 0;
 
 void	setup_signals_interactive(void);
 void	setup_signals_child(void);
