@@ -23,16 +23,10 @@ static void	sigint_interactive(int signo)
 	rl_on_new_line();
 	rl_redisplay();
 }
-
-static void	ignore_handler(int signo)
-{
-	(void)signo;
-}
-
 void	setup_signals_interactive(void)
 {
 	signal(SIGINT, sigint_interactive);
-	signal(SIGQUIT, ignore_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	setup_signals_child(void)
