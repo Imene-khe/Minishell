@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:58:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 18:39:14 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:20:38 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 int			is_allchar(char *str, char c);
+int			is_allchar(char *str, char c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 void		*ft_memchr(const void *s, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -85,7 +86,8 @@ void		ft_putnbrbase_fd(unsigned int n, char *base, int fd);
 void		ft_putchar_counts(char c, int *charcount);
 void		ft_putstr_counts(char *s, int *charcount);
 void		ft_putnbr_counts(int n, int *charcount);
-void		ft_putnbrbase_counts(uintptr_t n, char *base, int *charcount, int iter);
+void		ft_putnbrbase_counts(uintptr_t n, char *base,
+				int *charcount, int iter);
 int			ft_printf(const char *str, ...);
 char		*get_next_line(int fd);
 char		*altered_ft_strjoin(char *s1, char const *s2);

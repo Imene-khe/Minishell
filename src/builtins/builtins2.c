@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 17:10:57 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:25:50 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_env(t_exec *ex);
 
-void    env(t_tree *args, t_exec *ex, int count, int *run)
+void	env(t_tree *args, t_exec *ex, int count, int *run)
 {
 	ex->shell->status = 0;
 	if (!ex->shell->envp)
@@ -71,6 +71,7 @@ void	export(t_tree *args, t_shell *shell, t_exec *ex)
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
 		{
 			shell->status = 1;
+			ft_putstr_fd("minishishishi: export: no options managed\n", 2);
 			ft_putstr_fd("minishishishi: export: no options managed\n", 2);
 		}
 		else

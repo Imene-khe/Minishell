@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:44:40 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 18:24:29 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 17:00:15 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*next_strjoin(char *s1, char *s2, int len, t_shell *shell)
 	if (!join)
 		return (free(s1), NULL);
 	j = ft_strlen(s1);
+	tmp = NULL;
 	if (!ft_strcmp(s2, "?"))
 	{
 		tmp = ft_itoa(shell->status);
@@ -48,7 +49,10 @@ char	*next_strjoin(char *s1, char *s2, int len, t_shell *shell)
 	}
 	else
 	{
-		tmp = cut_spaces(ft_getenv(shell->envp, s2));
+		if (ft_getenv(shell->envp, s2))
+			tmp = cut_spaces(ft_getenv(shell->envp, s2));
+		else
+			tmp = ft_strdup("");
 		if (!tmp)
 			return (free(s1), free(join), NULL);
 	}
@@ -76,7 +80,7 @@ char	*cut_spaces(char *str)
 		{
 			while (str[i] && str[i] != ' ')
 				new[j++] = str[i++];
-			if (str[i] && !only_spaces(str + i))
+			if (str[i] && !only_spaces(str + i, 0))
 				new[j++] = ' ';
 		}
 	}
@@ -88,8 +92,10 @@ int	len_val(char *s1, char *s2, char *str, t_shell *shell)
 {
 	char	*tmp;
 	int		ret;
-	
+	int		val_len;
+
 	tmp = NULL;
+	val_len = 0;
 	if (!ft_strcmp(s2, "?"))
 	{
 		tmp = ft_itoa(shell->status);
@@ -100,8 +106,9 @@ int	len_val(char *s1, char *s2, char *str, t_shell *shell)
 	}
 	else
 	{
-		ret = ft_strlen(s1) + ft_strlen(str) - ft_strlen(s2)
-		+ ft_strlen(ft_getenv(shell->envp, s2));
+		if (ft_getenv(shell->envp, s2))
+			val_len = ft_strlen(ft_getenv(shell->envp, s2));
+		ret = ft_strlen(s1) + ft_strlen(str) - ft_strlen(s2) + val_len;
 	}
 	return (ret);
 }

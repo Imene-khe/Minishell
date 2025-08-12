@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:51:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/10 20:14:37 by mac              ###   ########.fr       */
+/*   Updated: 2025/08/11 22:48:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,12 @@ int	need_fork(t_exec *ex, t_tree *tree)
 	curr = tree;
 	while (curr && curr->type != CMD)
 		curr = curr->left;
-	if (curr && ft_strcmp(curr->content, "cd") && ft_strcmp(curr->content, "unset")
-		&& ft_strcmp(curr->content, "export") && ft_strcmp(curr->content, "exit")
-		&& ft_strcmp(curr->content, "env") && ft_strcmp(curr->content, "pwd")
+	if (curr && ft_strcmp(curr->content, "cd")
+		&& ft_strcmp(curr->content, "unset")
+		&& ft_strcmp(curr->content, "export")
+		&& ft_strcmp(curr->content, "exit")
+		&& ft_strcmp(curr->content, "env")
+		&& ft_strcmp(curr->content, "pwd")
 		&& ft_strcmp(curr->content, "echo"))
 		return (1);
 	return (0);

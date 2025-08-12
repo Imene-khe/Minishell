@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:17:14 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/27 17:00:59 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:46:19 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	free_exec(t_exec *exec)
 
 void	close_fds(int *fds)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 2)

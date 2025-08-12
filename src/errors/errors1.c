@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 16:04:00 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:21:31 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,42 +86,18 @@ void	cmnd_errors(char *cmnd)
 
 void	cd_errors(t_shell *shell, char *file, int cwd)
 {
-	if (cwd)
-		ft_putstr_fd("minishishishi: cd: error retrieving current directory\n", 2);
+	ft_putstr_fd("minishishishi: cd: ", 2);
+	if (cwd == 1)
+		ft_putstr_fd("error retrieving current directory\n", 2);
 	else if (!file)
-		ft_putstr_fd("minishishishi: cd: too many arguments\n", 2);
+		ft_putstr_fd("too many arguments\n", 2);
 	else
 	{
-		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(file, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		if (cwd == 2)
+			ft_putstr_fd(" : not set\n", 2);
+		else
+			ft_putstr_fd(" : No such file or directory\n", 2);
 	}
 	shell->status = 1;
-}
-
-void	exit_errors(char *arg)
-{
-	if (!arg)
-		ft_putstr_fd("minishishishi: exit: too many arguments\n", 2);
-	else
-	{
-		ft_putstr_fd("minishishishi: exit: ", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd(": numeric argument required\n", 2);
-	}
-}
-
-void	env_errors(t_shell *shell, char *arg)
-{
-	shell->status = 1;
-	ft_putstr_fd("minishishishi: env: ", 2);
-	if (!arg)
-		ft_putstr_fd("No environment variables set\n", 2);
-	else if (arg[0] == '-' && ft_strlen(arg) > 1)
-		ft_putstr_fd("no options managed\n", 2);
-	else
-	{
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-	}
 }

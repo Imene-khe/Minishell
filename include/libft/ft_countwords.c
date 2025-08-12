@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:01:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/02/25 13:05:23 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:00:35 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	ft_countwords(char const *s, char c)
 	int	i;
 	int	words;
 
+	if (!s)
+		return (0);
 	count = 1;
 	i = 0;
 	words = 0;

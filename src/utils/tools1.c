@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:39:04 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 17:22:19 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:45:34 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	nothing(char *str)
 	int		i;
 	int		char_nb;
 	char	c;
+
 	i = 0;
 	char_nb = 0;
 	c = 0;
@@ -35,19 +36,21 @@ static int	nothing(char *str)
 	return (0);
 }
 
-int	only_spaces(char *str)
+int	only_spaces(char *str, int step)
 {
 	int	i;
 
 	i = 0;
 	while (str[i] && str[i] == ' ')
 		i++;
-	if (str[i])
+	if (str[i] && step == 1)
 		return (nothing(str));
+	if (str[i])
+		return (0);
 	return (1);
 }
 
-static void ignore_quote(char *s, int *i, int which, int *count)
+static void	ignore_quote(char *s, int *i, int which, int *count)
 {
 	*count = -*count;
 	*i += 1;
@@ -86,11 +89,11 @@ int	closed(char *str)
 int	is_sep(const char *str)
 {
 	if (str[0] != '|' && str[0] != '<' && str[0] != '>'
-			&& ft_strncmp(str, "<<", 2) != 0
-			&& ft_strncmp(str, ">>", 2) != 0)
+		&& ft_strncmp(str, "<<", 2) != 0
+		&& ft_strncmp(str, ">>", 2) != 0)
 		return (0);
 	if (!ft_strncmp(str, "<<", 2)
-			|| !ft_strncmp(str, ">>", 2))
+		|| !ft_strncmp(str, ">>", 2))
 		return (2);
 	return (1);
 }

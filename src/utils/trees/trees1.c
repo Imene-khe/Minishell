@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 14:54:46 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 15:05:07 by bguerrou         ###   ########.fr       */
+/*   Created: 2025/08/12 14:31:07 by bguerrou          #+#    #+#             */
+/*   Updated: 2025/08/12 14:31:08 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,6 @@ void	free_tree(t_tree *tree)
 		free_tree(tree->right);
 	free(tree->content);
 	free(tree);
-}
-
-void	print_tree(t_tree *node, int depth)
-{
-    if (!node)
-        return;
-    // Affiche le sous-arbre droit en premier (pour avoir la racine à gauche)
-    print_tree(node->right, depth + 1);
-
-    // Affiche la racine avec des tabs selon la profondeur
-    for (int i = 0; i < depth; i++)
-        printf("\t");
-    printf("%s\n", node->content); // adapte selon le champ à afficher
-
-    // Affiche le sous-arbre gauche
-    print_tree(node->left, depth + 1);
 }
 
 int	count_elm(t_tree *tree, int type)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/10 20:08:01 by mac              ###   ########.fr       */
+/*   Updated: 2025/08/11 23:28:06 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		opening(t_tree *tree, t_exec *ex, int *in, int *out);
 void	assign_fd(t_exec *ex, int *fd_count, int in_out, int tmp_fd);
 int		manage_heredoc(t_tree *tree, t_exec *ex);
 
-int try_open(t_tree *tree, t_exec *ex, int *in, int *out)
+int	try_open(t_tree *tree, t_exec *ex, int *in, int *out)
 {
 	int	ret;
 
@@ -36,28 +36,28 @@ int try_open(t_tree *tree, t_exec *ex, int *in, int *out)
 
 int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 {
-	int	tmp_fd;
+	int		tmp_fd;
+	char	*right_content;
 
+	right_content = tree->right->content;
 	if (tree->type == REDIR_IN)
 	{
 		if (ft_strcmp(tree->content, "<<") == 0)
 			tmp_fd = manage_heredoc(tree, ex);
 		else
-			tmp_fd = open(tree->right->content, O_RDONLY);
+			tmp_fd = open(right_content, O_RDONLY);
 		if (tmp_fd < 0)
-			return (print_error("No such file or directory", tree->right->content), 0);
+			return (print_error("No such file or directory", right_content), 0);
 		assign_fd(ex, in, 0, tmp_fd);
 	}
 	else if (tree->type == REDIR_OUT)
 	{
 		if (ft_strcmp(tree->content, ">>") == 0)
-			tmp_fd = open(tree->right->content, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			tmp_fd = open(right_content, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
-			tmp_fd = open(tree->right->content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (tmp_fd == -1)
-			return (0);
+			tmp_fd = open(right_content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (tmp_fd < 0)
-			return (print_error("Cannot open file", tree->right->content), 0);
+			return (print_error("Cannot open file", right_content), 0);
 		assign_fd(ex, out, 1, tmp_fd);
 	}
 	return (1);
@@ -93,8 +93,10 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	{
 		if (buff)
 		{
-			write(pip[1], buff, ft_strlen(buff));
-			write(pip[1], "\n", 1);
+			if (write(pip[1], buff, ft_strlen(buff)) < 0
+				|| write(pip[1], "\n", 1) < 0)
+				return (free(buff), close_fds(pip),
+					clear_exit(tree, ex, 1, "write"), -1);
 			free(buff);
 		}
 		buff = readline("> ");
@@ -104,6 +106,3 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	close(pip[1]);
 	return (free(buff), pip[0]);
 }
-
-
-

@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 18:39:37 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:01:16 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	echo(t_tree *args, t_exec *ex)
 	{
 		strarg = NULL;
 		curr = args;
-		while (curr && curr->content[0] == '-' && is_allchar(curr->content + 1, 'n'))
+		while (curr && curr->content[0] == '-'
+			&& is_allchar(curr->content + 1, 'n'))
 			curr = curr->right;
 		strarg = tree_to_str(curr, strarg, 0);
 		if (strarg)
@@ -86,17 +87,17 @@ void	cd(t_tree *args, t_exec *ex)
 	old = getcwd(old, PATH_SIZE);
 	if (!old)
 		return (cd_errors(ex->shell, NULL, 1));
-	if (count_elm(args, ARG) == 0 || (count_elm(args, ARG) == 1 && !ft_strcmp(args->content, "~")))
+	if (cd_verify(args))
 	{
 		val = ft_getenv(ex->shell->envp, "HOME");
 		if (!val || chdir(val) == -1)
-			return (free(old), ex->shell->status = 1, ft_putstr_fd("cd: HOME not set\n", 2));
+			return (free(old), cd_errors(ex->shell, "HOME", 2));
 	}
 	else if (count_elm(args, ARG) == 1 && !ft_strcmp(args->content, "-"))
 	{
 		val = ft_getenv(ex->shell->envp, "OLDPWD");
 		if (!val || chdir(val) == -1)
-			return (free(old), ex->shell->status = 1, ft_putstr_fd("cd: OLDPWD not set\n", 2));
+			return (free(old), cd_errors(ex->shell, "OLDPWD", 2));
 	}
 	else if (chdir(args->content) == -1)
 		return (free(old), cd_errors(ex->shell, args->content, 0));

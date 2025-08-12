@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanding_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:17:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/01 14:17:11 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:38:09 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ int	till_sep(char *str)
 	int	i;
 
 	i = 0;
+	if (str && str[i] >= '0' && str[i] <= '9')
+		return (++i);
 	while (str[i] && str[i] != ' ' && str[i] != '$'
-			&& str[i] != '\'' && str[i] != '\"' && str[i] != '='
-			&& str[i] != '\\' && str[i] != '/')
+		&& str[i] != '\'' && str[i] != '\"' && str[i] != '='
+		&& str[i] != '\\' && str[i] != '/' && str[i] != ':'
+		&& str[i] != '[' && str[i] != ']' && str[i] != '%')
 		i++;
 	return (i);
 }

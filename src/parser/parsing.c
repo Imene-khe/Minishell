@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 17:38:44 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/25 12:31:17 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:43:43 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ t_tree	*transform(t_line *line, int prio, int limit, int exclude)
 	current = line;
 	while (current && current->nb <= exclude && exclude != -1)
 		current = current->next;
-	while (current && current->next && current->nb < limit && count_prio(current) != prio)
+	while (current && current->next && current->nb < limit
+		&& count_prio(current) != prio)
 		current = current->next;
 	if (!current || current->nb >= limit || count_prio(current) != prio)
 		return (transform(line, prio - 1, limit, -1));

@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:54:08 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 16:41:52 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:30:56 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	arr_size(char **arr)
 	return (count);
 }
 
-char **ft_arrdup(char **arr, int size)
+char	**ft_arrdup(char **arr, int size)
 {
 	char	**dup;
 	int		i;
@@ -68,8 +68,8 @@ int	is_dir(const char *cmd)
 		if (cmd[i] == '.')
 			dot++;
 	}
-	if ((slash == i || (dot ==1 && i == 1)
-		|| slash + dot == i) && i > 0)
+	if ((slash == i || (dot == 1 && i == 1)
+			|| slash + dot == i) && i > 0)
 		return (1);
 	return (0);
 }

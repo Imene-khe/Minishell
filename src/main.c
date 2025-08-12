@@ -6,14 +6,12 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 16:55:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 17:04:19 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 15:31:20 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 #include "signals/signals.h"
-
-pid_t	g_signal_pid;
 
 int	next(t_shell *shell);
 
@@ -34,6 +32,7 @@ int	main(int argc, char **argv, char **envp)
 	free_shell(shell);
 	return (exit_code);
 }
+
 int	next(t_shell *shell)
 {
 	int		run;
@@ -46,35 +45,8 @@ int	next(t_shell *shell)
 		prompt = readline("minishishishi > ");
 		if (!prompt)
 			exit_built(NULL, NULL, &run);
-		if (run && !only_spaces(prompt) && ft_strlen(prompt) > 0)
+		if (run && !only_spaces(prompt, 1) && ft_strlen(prompt) > 0)
 			treatment(prompt, &run, shell);
 	}
 	return (shell->status);
 }
-/*int	next(t_shell *shell)
-{
-	int	run;
-	setup_signals_interactive();
-	char	*prompt;
-
-	run = 1;
-	while (run)
-	{
-		prompt = readline("minishishishi > ");
-		if (!prompt)
-			return (print_error("Malloc failed", "readline"), 1); ca je l'enelve
-			car en gros maintenant je prends en consideration control + D
-		if (!prompt)
-		{
-			write(1, "exit\n", 5);
-			break;
-		}
-		if (!only_spaces(prompt) || ft_strlen(prompt) == 0)
-		{
-			free(prompt);
-			continue;
-		}
-		treatment(prompt, &run, shell);
-	}
-	return (shell->status);
-}*/

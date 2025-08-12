@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:23:15 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 16:32:12 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:22:50 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_line	*line_new(char *content, int type, int nb)
 	new = malloc(sizeof(t_line));
 	if (!new)
 		return (NULL);
-	new->content = custom_strdup(content);
+	new->content = custom_strdup(content, 0, 0);
 	if (!new->content)
 		return (free(new), NULL);
 	new->type = type;
@@ -28,13 +28,13 @@ t_line	*line_new(char *content, int type, int nb)
 	return (new);
 }
 
-void    line_add_back(t_line **head, t_line **new)
+void	line_add_back(t_line **head, t_line **new)
 {
-	t_line  *current;
+	t_line	*current;
 
-    if (!new)
+	if (!new)
 		return ;
-    if (!*head)
+	if (!*head)
 	{
 		*head = *new;
 		return ;

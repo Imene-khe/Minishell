@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 17:58:01 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:25:10 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ t_line	*subsplit(char *str, int *t, int *s, int *j)
 	i = 0;
 	while (subsplit[i])
 	{
-		current = line_new(subsplit[i], check_type(subsplit[i], t, s, 0), (*j)++);
+		current
+			= line_new(subsplit[i], check_type(subsplit[i], t, s, 0), (*j)++);
 		if (!current)
 			return (free_arr(subsplit, ft_countwords(str, ' ')), NULL);
 		line_add_back(&new, &current);

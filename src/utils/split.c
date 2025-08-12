@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 17:53:22 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 14:29:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ static char	*custom_cpytillsep(char const *s, char c, int ignore)
 	return (str);
 }
 
-int  custom_countwords(char *str, char sep)
+int	custom_countwords(char *str, char sep)
 {
-	int count;
-	int i;
-	int words;
+	int	count;
+	int	i;
+	int	words;
 
 	count = 1;
 	i = -1;

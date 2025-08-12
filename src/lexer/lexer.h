@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:58 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 13:19:34 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/09 17:42:04 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@
 # include "../utils/lists/lists.h"
 # include "../expander/expander.h"
 
-struct s_line  *lexer(char *prompt, t_shell *shell);
+struct s_line	*lexer(char *prompt, t_shell *shell);
 
 #endif

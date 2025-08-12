@@ -10,12 +10,15 @@ SRCS = $(addprefix src/, \
 						parser/paths.c \
 						executor/exec.c \
 						executor/redir.c \
+						executor/pipe.c \
 						executor/cmds.c \
 						executor/execution.c \
 						builtins/builtins1.c \
 						builtins/builtins2.c \
+						builtins/built_tools.c \
 						builtins/export.c \
 						errors/errors1.c \
+						errors/errors2.c \
 						utils/split.c \
 						utils/tools1.c \
 						utils/tools2.c \

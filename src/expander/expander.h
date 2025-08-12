@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:58 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 16:53:55 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/12 16:20:09 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 char	*expand(char *str, t_shell *shell, int mode);
 
-int	    till_sep(char *str);
-int	    change_mode(char c, int *mode);
+int		till_sep(char *str);
+int		change_mode(char c, int *mode);
 char	*var_name(char *str);
 
 #endif

@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/mimo/cursus42/zero/src/errors",
-      "program": "/home/mimo/cursus42/zero/src/errors/build/Debug/outDebug",
+      "cwd": "/home/mimo/cursus42/minishell_priv/src",
+      "program": "/home/mimo/cursus42/minishell_priv/src/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
