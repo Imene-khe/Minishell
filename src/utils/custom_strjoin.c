@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:44:40 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 17:00:15 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/13 14:21:46 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*next_strjoin(char *s1, char *s2, int len, t_shell *shell)
 	if (!join)
 		return (free(s1), NULL);
 	j = ft_strlen(s1);
-	tmp = NULL;
 	if (!ft_strcmp(s2, "?"))
 	{
 		tmp = ft_itoa(shell->status);

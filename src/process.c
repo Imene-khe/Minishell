@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:09:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:19:42 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:39:07 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ void	treatment(char *prompt, int *run, t_shell *shell)
 	if (closed(prompt))
 	{
 		line = lexer(prompt, shell);
-		free(prompt);
 		if (!line)
-			return (free_shell(shell),
+			return (free(prompt), free_shell(shell),
 				print_error("Malloc failed", "lexer"), exit(1));
-		if (!verify_line(line, line, 2))
-			return (line_free(line));
+		if (custom_countwords(prompt, ' ') == 1 && !is_quote(prompt[0])
+			&& !verify_line(line, line, 2))
+			return (free(prompt), line_free(line));
+		free(prompt);
 		tree = transform(line, 3, line_size(line), -1);
 		line_free(line);
 		if (!tree)
@@ -66,6 +67,8 @@ int	verify_line(t_line *line, t_line *head, int prio)
 {
 	int	ret;
 
+	if (line_size(line) == 1 && ft_strlen(line->content) == 0)
+		return (0);
 	if (!line && prio != 1)
 		return (verify_line(head, head, prio - 1));
 	if (!line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:51:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 22:48:24 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:31:26 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	waiting(t_tree *tree, t_exec *ex)
 	int	status;
 
 	i = 0;
+	status = 0;
 	count = count_elm(tree, CMD);
 	while (i < count)
 	{

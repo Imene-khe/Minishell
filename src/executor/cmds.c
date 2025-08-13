@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:22:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 13:42:47 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:01:49 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
 char	**set_command(char *cmnd, char **paths, t_tree *args, t_exec *ex);
+void	reset_fds(t_exec *ex);
 
 int	exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run)
 {
@@ -30,7 +31,7 @@ int	exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run)
 	{
 		if (ex->need_fork)
 			clear_exit(ex->tree, ex, 0, "builtins");
-		return (0);
+		return (reset_fds(ex), 0);
 	}
 	cmnd = set_command(tree->content, ex->paths, tree->right, ex);
 	if (ex->in_env && !cmnd)
@@ -40,6 +41,20 @@ int	exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run)
 	env = env_to_arr(ex->shell->envp);
 	execution(ex, fds, cmnd, env);
 	return (0);
+}
+
+void	reset_fds(t_exec *ex)
+{
+	if (ex->read_fd != 0)
+	{
+		close(ex->read_fd);
+		ex->read_fd = 0;
+	}
+	if (ex->write_fd != 1)
+	{
+		close(ex->write_fd);
+		ex->write_fd = 1;
+	}
 }
 
 char	**set_command(char *cmnd, char **paths, t_tree *args, t_exec *ex)
