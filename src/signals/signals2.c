@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.h                                          :+:      :+:    :+:   */
+/*   signals2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikhelil <ikhelil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/11 14:14:52 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 21:19:53 by ikhelil          ###   ########.fr       */
+/*   Created: 2025/08/14 19:04:04 by ikhelil           #+#    #+#             */
+/*   Updated: 2025/08/14 19:08:17 by ikhelil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNALS_H
-# define SIGNALS_H
+#include "signals.h"
 
-# include <signal.h>
-# include "signals.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <unistd.h>
-# include <sys/wait.h>
+void	parent_exec_signals_begin(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
 
-extern int	g_signal;
-
-void	setup_signals_interactive(void);
-void	setup_signals_child(void);
-int		interpret_wait_status(int wstatus);
-void	parent_exec_signals_begin(void);
-void	parent_exec_signals_end(void);
-
-#endif
+void parent_exec_signals_end(void)
+{
+	setup_signals_interactive();
+}
