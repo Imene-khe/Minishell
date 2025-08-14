@@ -6,13 +6,11 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:21:31 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:16:07 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
-
-void	cmnd_errors(char *cmnd);
 
 void	clear_exit(t_tree *tree, t_exec *ex, int code, char *source)
 {
@@ -26,8 +24,15 @@ void	clear_exit(t_tree *tree, t_exec *ex, int code, char *source)
 		print_error("Couldn't execute", source);
 	else if (code == 5)
 		print_error("Pipe failed", source);
+	else if (code == 126)
+		cmnd_errors(source, 1);
 	else if (code == 127)
-		cmnd_errors(source);
+	{
+		if (ex && ex->in_env)
+			env_errors(ex->shell, source);
+		else
+			cmnd_errors(source, 0);
+	}
 	else
 		print_error("Unknown error", source);
 	free_structs(tree, ex, 1);
@@ -77,11 +82,18 @@ void	line_errors(t_line *line, int code)
 	}
 }
 
-void	cmnd_errors(char *cmnd)
+void	cmnd_errors(char *cmnd, int count)
 {
 	ft_putstr_fd("minishishishi: ", 2);
+	if (count)
+		ft_putstr_fd("\'", 2);
 	ft_putstr_fd(cmnd, 2);
-	ft_putstr_fd(": command not found\n", 2);
+	if (count)
+		ft_putstr_fd("\'", 2);
+	if (count)
+		ft_putstr_fd(": Permission denied\n", 2);
+	else
+		ft_putstr_fd(": command not found\n", 2);
 }
 
 void	cd_errors(t_shell *shell, char *file, int cwd)

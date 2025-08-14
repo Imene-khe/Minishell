@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:29 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:27:14 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 18:56:35 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_env	*find_smallest(t_env *env, t_env **selected, int i);
 void	print_export(t_env	*sorted_envp, t_shell *shell);
-void	verify_export(t_tree *curr, t_shell *shell, char *name);
+void	verify_export(t_tree *curr, t_shell *shell, t_exec *ex, char *name);
 
 void	export_noargs(t_shell *shell, t_exec *ex)
 {
@@ -94,21 +94,15 @@ void	export_args(t_tree *args, t_shell *shell, t_exec *ex)
 		name = ft_strndup(curr->content, size);
 		if (!name)
 			return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
-		if (!ft_isallalnum(name))
-		{
-			shell->status = 1;
-			ft_putstr_fd("minishishishi: ", 2);
-			ft_putstr_fd(name, 2);
-			ft_putstr_fd(": not a valid identifier\n", 2);
-			return (free(name));
-		}
-		verify_export(curr, shell, name);
+		if (!ft_isallalnum(name) || (size >= 1 && ft_isdigit(name[0])) || size == 0)
+			return (export_errors(shell, args->content), free(name));
+		verify_export(curr, shell, ex, name);
 		free(name);
 		curr = curr->right;
 	}
 }
 
-void	verify_export(t_tree *curr, t_shell *shell, char *name)
+void	verify_export(t_tree *curr, t_shell *shell, t_exec *ex, char *name)
 {
 	t_env	*tmp;
 
@@ -121,6 +115,10 @@ void	verify_export(t_tree *curr, t_shell *shell, char *name)
 			free(tmp->value);
 		tmp->value = NULL;
 		if (until_sep(curr->content, '=') < (int)ft_strlen(curr->content))
+		{
 			tmp->value = ft_strdup(ft_strchr(curr->content, '=') + 1);
+			if (!tmp->value)
+				return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
+		}
 	}
 }

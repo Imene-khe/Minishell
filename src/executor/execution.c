@@ -6,14 +6,14 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:51:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/13 17:31:26 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:53:19 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 #include "../signals/signals.h"
 
-void	waiting(t_tree *tree, t_exec *ex)
+void	waiting(t_exec *ex)
 {
 	int	i;
 	int	count;
@@ -21,7 +21,7 @@ void	waiting(t_tree *tree, t_exec *ex)
 
 	i = 0;
 	status = 0;
-	count = count_elm(tree, CMD);
+	count = ex->cmd_count;
 	while (i < count)
 	{
 		if (ex->pid[i] != -1)
@@ -72,5 +72,21 @@ int	need_fork(t_exec *ex, t_tree *tree)
 		&& ft_strcmp(curr->content, "pwd")
 		&& ft_strcmp(curr->content, "echo"))
 		return (1);
+	return (0);
+}
+
+int	forking(t_exec *ex, t_tree *tree, int count, int *run)
+{
+	ex->pid[count] = fork();
+	if (ex->pid[count] == -1)
+		clear_exit(ex->tree, ex, 2, "fork()");
+	if (ex->pid[count] == 0)
+	{
+		setup_signals_child();
+		exec(tree, ex, count, run);
+		return (1);
+	}
+	else
+		return (2);
 	return (0);
 }

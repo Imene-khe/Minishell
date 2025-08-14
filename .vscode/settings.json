@@ -14,7 +14,13 @@
     "builtins.h": "c",
     "system_error": "c",
     "fcntl.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "array": "c",
+    "string_view": "c",
+    "initializer_list": "c",
+    "ranges": "c",
+    "span": "c",
+    "utility": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

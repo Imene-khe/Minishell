@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:22:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/13 18:01:49 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:16:40 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ int	exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run)
 		return (reset_fds(ex), 0);
 	}
 	cmnd = set_command(tree->content, ex->paths, tree->right, ex);
-	if (ex->in_env && !cmnd)
-		return (1);
 	if (!cmnd)
 		clear_exit(ex->tree, ex, 127, tree->content);
 	env = env_to_arr(ex->shell->envp);
@@ -63,9 +61,10 @@ char	**set_command(char *cmnd, char **paths, t_tree *args, t_exec *ex)
 
 	if (!ft_strncmp(cmnd, "", 1))
 		return (NULL);
-	if ((!ft_strncmp(cmnd, "./", 2) && !access(cmnd, X_OK))
-		|| !access(cmnd, X_OK))
+	if (!ft_strncmp(cmnd, "./", 2) && !access(cmnd, X_OK))
 		return (cmnd_split(cmnd, args, ex));
+	else if (!ft_strncmp(cmnd, "./", 2))
+		return (clear_exit(ex->tree, ex, 126, cmnd), NULL);
 	while (*paths)
 	{
 		path = ft_strjoin(*(paths++), "/");

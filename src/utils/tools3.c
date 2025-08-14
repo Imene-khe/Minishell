@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 12:34:30 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:48:30 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:05:06 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,20 @@ int	too_big(char *str, int size)
 		|| ft_strcmp(str, "-9223372036854775808") > 0)
 		return (1);
 	return (0);
+}
+
+void	env_process(t_exec *ex, t_tree *args, int count, int *run)
+{
+	ex->pid[count] = fork();
+	if (ex->pid[count] == -1)
+		clear_exit(ex->tree, ex, 2, "fork()");
+	if (ex->pid[count] == 0)
+	{
+		setup_signals_child();
+		exec_cmd(args, ex, count, run);
+	}
+	else
+		reset_pipe(ex, count);
+	ex->in_env = 0;
+	ex->need_fork = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:09:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/13 17:39:07 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:53:41 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	prep_exec(t_tree *tree, int *run, t_shell *shell)
 		ex->need_pipe = 1;
 	}
 	pre_exec(tree, ex, run);
-	waiting(tree, ex);
+	waiting(ex);
 	free_structs(tree, ex, 0);
 }
 

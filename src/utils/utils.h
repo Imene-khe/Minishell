@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:35:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 15:31:06 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 18:37:23 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int		is_quote(char c);
 int		arr_size(char **arr);
 char	**ft_arrdup(char **arr, int size);
 int		is_dir(const char *cmd);
+int	    plus_equal(char *str);
 
 // Tools 3
 int		until_sep(char *str, char sep);
 char	**cmnd_split(char *path, t_tree *args, t_exec *ex);
 void	modify_var(t_exec *ex, char *name, char *value, char *other);
 int		too_big(char *str, int size);
+void	env_process(t_exec *ex, t_tree *args, int count, int *run);
 
 // Custom Strdup
 char	*custom_strdup(const char *s, int ignore, int type);

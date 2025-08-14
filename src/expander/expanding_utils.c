@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/07 17:17:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/13 16:17:22 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 17:04:45 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	till_sep(char *str)
 	int	i;
 
 	i = 0;
-	if (str && str[i] >= '0' && str[i] <= '9')
+	if (str && ((str[i] >= '0' && str[i] <= '9') || str[i] == '?'))
 		return (++i);
 	while (str[i] && str[i] != ' ' && str[i] != '$'
 		&& str[i] != '\'' && str[i] != '\"' && str[i] != '='

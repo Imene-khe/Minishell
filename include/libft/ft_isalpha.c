@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi2020@gmail.co    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 12:02:48 by bguerrou          #+#    #+#             */
-/*   Updated: 2024/11/18 17:47:06 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:52:04 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ int	ft_isalpha(int c)
 		return (1);
 	return (0);
 }
+
+int	ft_isallalpha(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && ft_isalpha(str[i]))
+		i++;
+	if (str[i])
+		return (0);
+	return (1);
+}
+
 /*
 #include <stdio.h>
 #include <ctype.h>

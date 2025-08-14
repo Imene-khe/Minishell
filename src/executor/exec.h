@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:53:05 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 16:40:11 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:53:28 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ void	set_fds(t_exec *ex, int count);
 void	pair_pipe(t_exec *ex, int count, int pipe1[2], int pipe2[2]);
 
 // Execution
-void	waiting(t_tree *tree, t_exec *ex);
+void	waiting(t_exec *ex);
 void	execution(t_exec *ex, int fds[2], char **cmnd, char **env);
 void	dups(t_exec *ex, int fd, int fds[2], int dupped);
 int		need_fork(t_exec *ex, t_tree *tree);
+int 	forking(t_exec *ex, t_tree *tree, int count, int *run);
 
 #endif

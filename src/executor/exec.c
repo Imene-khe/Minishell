@@ -6,12 +6,11 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:52:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/13 17:46:35 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:37:54 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-#include "../signals/signals.h"
 
 t_exec	*init_exec(t_tree *tree, t_exec *exec, t_shell *shell)
 {
@@ -72,14 +71,19 @@ int	exec(t_tree *tree, t_exec *ex, int count, int *run)
 		return (0);
 	in = 0;
 	out = 0;
-	if (!try_open(tree, ex, &in, &out))
-		return (2);
-	if (ex->need_pipe)
-		set_fds(ex, count);
+	if (*run == 1)
+	{
+		if (!try_open(tree, ex, &in, &out))
+			return (0);
+		if (ex->need_pipe)
+			set_fds(ex, count);
+	}
+	else
+		*run = 1;
 	curr = tree;
 	while (curr && curr->type != CMD)
 		curr = curr->left;
 	if (curr)
-		exec_cmd(curr, ex, count, run);
+		return (exec_cmd(curr, ex, count, run));
 	return (0);
 }

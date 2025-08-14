@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 15:01:16 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:45:21 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	cd_next(t_tree *args, t_exec *ex, char *old);
 int	builtins(t_tree *tree, t_exec *ex, int count, int *run)
 {
 	if (!ft_strcmp(tree->content, "echo"))
-		return (echo(tree->right, ex), ex->shell->status = 0, 1);
+		return (echo(tree->right, ex), 1);
 	if (!ft_strcmp(tree->content, "pwd"))
 		return (pwd(ex), 1);
 	if (!ft_strcmp(tree->content, "env"))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 10:25:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/03/22 14:04:50 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 18:09:40 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*altered_ft_strjoin(char *s1, char const *s2)
 	if (!s2)
 		return (free(s1), NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	join = malloc(sizeof(char) * len + 2);
+	join = ft_calloc(sizeof(char), len + 2);
 	if (!join)
 		return (free(s1), NULL);
 	i = -1;
@@ -77,7 +77,6 @@ char	*altered_ft_strjoin(char *s1, char const *s2)
 	j = 0;
 	while (s2[j])
 		join[i++] = s2[j++];
-	join[i] = '\0';
 	return (join);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:25:50 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:55:41 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ void	env(t_tree *args, t_exec *ex, int count, int *run)
 		return (env_errors(ex->shell, NULL));
 	else if (count_elm(args, ARG) >= 1)
 	{
-		ex->in_env = 1;
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
 			return (env_errors(ex->shell, args->content));
-		else
+		ex->in_env = 1;
+		*run = 2;
+		args->type = CMD;
+		ex->need_fork = need_fork(ex, args);
+		if (!ex->need_fork)
 			ex->in_env = exec_cmd(args, ex, count, run);
-		if (ex->in_env == 1)
-			env_errors(ex->shell, args->content);
+		else
+			env_process(ex, args, count, run);
 		ex->in_env = 0;
 	}
 	else
@@ -69,11 +72,7 @@ void	export(t_tree *args, t_shell *shell, t_exec *ex)
 	else if (args)
 	{
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
-		{
-			shell->status = 1;
-			ft_putstr_fd("minishishishi: export: no options managed\n", 2);
-			ft_putstr_fd("minishishishi: export: no options managed\n", 2);
-		}
+			export_errors(shell, NULL);
 		else
 			export_args(args, shell, ex);
 	}

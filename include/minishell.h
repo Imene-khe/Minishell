@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:02:20 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:20:46 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 14:37:41 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # include "../src/builtins/builtins.h"
 # include "../src/errors/errors.h"
 # include "../src/utils/utils.h"
+# include "../src/signals/signals.h"
 
 # define CMD 1
 # define ARG 2

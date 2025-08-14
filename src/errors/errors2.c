@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 16:25:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 16:32:47 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 15:54:57 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,20 @@ void	env_errors(t_shell *shell, char *arg)
 	{
 		ft_putstr_fd(arg, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
+	}
+}
+
+void	export_errors(t_shell *shell, char *arg)
+{
+	shell->status = 1;
+	ft_putstr_fd("minishishishi: ", 2);
+	if (!arg)
+		ft_putstr_fd("export: no options managed\n", 2);
+	else
+	{
+		ft_putstr_fd("\'", 2);
+		ft_putstr_fd(arg, 2);
+		ft_putstr_fd("\'", 2);
+		ft_putstr_fd(": not a valid identifier\n", 2);
 	}
 }

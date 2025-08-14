@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:58:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:20:38 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/14 18:47:00 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int			ft_isalpha(int c);
 int			ft_isdigit(int c);
 int			ft_isalldigit(const char *str);
 int			ft_isalnum(int c);
+int			ft_isallalpha(char *str);
 int			ft_isallalnum(char *str);
 int			ft_isascii(int c);
 int			ft_isprint(int c);
@@ -48,6 +49,7 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
 char		*ft_strchr(const char *s, int c);
+char		*custom_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 int			ft_strcmp(const char *s1, const char *s2);
 int			is_allchar(char *str, char c);
