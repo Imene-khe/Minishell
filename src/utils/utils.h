@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:35:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 18:37:23 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 18:56:06 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		is_quote(char c);
 int		arr_size(char **arr);
 char	**ft_arrdup(char **arr, int size);
 int		is_dir(const char *cmd);
-int	    plus_equal(char *str);
+void	set_ignore(int *ignore, char c);
 
 // Tools 3
 int		until_sep(char *str, char sep);
@@ -39,6 +39,7 @@ int		too_big(char *str, int size);
 void	env_process(t_exec *ex, t_tree *args, int count, int *run);
 
 // Custom Strdup
+int		count_quote(const char *s, int type);
 char	*custom_strdup(const char *s, int ignore, int type);
 
 // Custom strjoin

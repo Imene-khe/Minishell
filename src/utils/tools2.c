@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:54:08 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 18:56:55 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:24:41 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,12 @@ int	is_dir(const char *cmd)
 			|| slash + dot == i) && i > 0)
 		return (1);
 	return (0);
+}
+
+void	set_ignore(int *ignore, char c)
+{
+	if (is_quote(c) && !(*ignore))
+		*ignore = is_quote(c);
+	else if (*ignore && *ignore == is_quote(c))
+		*ignore = 0;
 }

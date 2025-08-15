@@ -6,19 +6,11 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 15:25:22 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:23:13 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-
-static void	set_ignore(int *ignore, char c)
-{
-	if (is_quote(c) && !(*ignore))
-		*ignore = 1;
-	else if (*ignore && *ignore == is_quote(c))
-		*ignore = 0;
-}
 
 static char	*custom_cpytillsep(char const *s, char c, int ignore)
 {
@@ -32,11 +24,11 @@ static char	*custom_cpytillsep(char const *s, char c, int ignore)
 	else
 		while (s[len] && ((s[len] != c && !is_sep(s + len)) || ignore))
 			set_ignore(&ignore, s[len++]);
-	str = malloc(sizeof(char) * len + 1);
+	str = malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (i < len && (s[i] != c || ignore))
+	while (i < len  && (s[i] != c || ignore))
 	{
 		str[i] = s[i];
 		set_ignore(&ignore, s[i++]);

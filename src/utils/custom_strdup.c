@@ -6,11 +6,13 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 12:46:54 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:45:33 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:19:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+int	count_quote(const char *s, int type);
 
 static int	check_quotes(char c, int *ignore, int *type)
 {
@@ -44,9 +46,25 @@ char	*custom_strdup(const char *s, int ignore, int type)
 	j = 0;
 	while (i < slen)
 	{
-		if (check_quotes(s[i], &ignore, &type))
+		if (check_quotes(s[i], &ignore, &type) || (count_quote(s, type) == 1))
 			dup[j++] = s[i];
 		i++;
 	}
 	return (dup);
+}
+
+int	count_quote(const char *s, int type)
+{
+	int		count;
+	int		i;
+
+	count = 0;
+	i = 0;
+	while (s[i])
+	{
+		if (is_quote(s[i]) == type)
+			count++;
+		i++;
+	}
+	return (count);
 }

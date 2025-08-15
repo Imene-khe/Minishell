@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhelil <ikhelil@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:09:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 21:31:17 by ikhelil          ###   ########.fr       */
+/*   Updated: 2025/08/15 17:16:22 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	treatment(char *prompt, int *run, t_shell *shell)
 		if (!line)
 			return (free(prompt), free_shell(shell),
 				print_error("Malloc failed", "lexer"), exit(1));
-		if (custom_countwords(prompt, ' ') == 1 && !is_quote(prompt[0])
-			&& !verify_line(line, line, 2))
+		if (!verify_line(line, line, 2))
 			return (free(prompt), line_free(line));
 		free(prompt);
 		tree = transform(line, 3, line_size(line), -1);

@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:29 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 13:07:55 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 21:14:16 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ void	export_args(t_tree *args, t_shell *shell, t_exec *ex)
 		if (!name)
 			return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
 		if (!ft_isallalnum(name) || (size >= 1 && ft_isdigit(name[0])) || size == 0)
-			return (export_errors(shell, curr->content), free(name));
-		verify_export(curr, shell, ex, name);
+			export_errors(shell, curr->content);
+		else
+			verify_export(curr, shell, ex, name);
 		free(name);
 		curr = curr->right;
 	}
