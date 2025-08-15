@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 23:30:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 14:37:02 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 13:02:21 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	interpret_wait_status(int wstatus)
 	{
 		sig = WTERMSIG(wstatus);
 		if (sig == SIGQUIT)
-			write(2, "Quit\n", 5);
+			write(2, "Quit (core dumped)\n", 19);
 		else if (sig == SIGINT)
 			write(2, "\n", 1);
 		return (128 + sig);

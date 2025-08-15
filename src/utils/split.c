@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:29:24 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 15:25:22 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	set_ignore(int *ignore, char c)
 {
 	if (is_quote(c) && !(*ignore))
 		*ignore = 1;
-	else if (is_quote(c) && *ignore)
+	else if (*ignore && *ignore == is_quote(c))
 		*ignore = 0;
 }
 
@@ -50,6 +50,7 @@ int	custom_countwords(char *str, char sep)
 	int	count;
 	int	i;
 	int	words;
+	int	quote;
 
 	count = 1;
 	i = -1;
@@ -61,11 +62,12 @@ int	custom_countwords(char *str, char sep)
 			words++;
 			count = 0;
 		}
-		if ((count == 0 && str[i] == sep) || is_sep(str + i))
+		if (is_sep(str + i) || (count == 0 && str[i] == sep))
 			count = 1;
-		if (is_quote(str[i]))
-			while (str[++i] && !is_quote(str[i]))
-				i = i + 0;
+		quote = is_quote(str[i]);
+		if (quote)
+			while (quote && str[++i])
+				set_ignore(&quote, str[i]);
 	}
 	return (words);
 }
@@ -103,7 +105,7 @@ char	**custom_split(char *str, char sep)
 {
 	char	**split;
 
-	split = malloc(sizeof(char *) * (custom_countwords(str, sep) + 1));
+	split = ft_calloc(sizeof(char *), (custom_countwords(str, sep) + 1));
 	if (!split)
 		return (NULL);
 	split = ft_alloc(str, sep, split);
