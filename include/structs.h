@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:15:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 16:19:53 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 22:12:51 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_shell
 {
 	t_env			*envp;
 	int				status;
+	int				quoted;
 }					t_shell;
 
 typedef struct s_exec

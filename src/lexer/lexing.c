@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 20:57:24 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 22:13:16 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_line	*lexer_next(char **split, int *t, int *s, t_shell *shell)
 	head = NULL;
 	while (split[++i])
 	{
+		shell->quoted = 0;
 		expanded = expand(split[i], shell, 0);
 		if (!expanded)
 			return (line_free(head), NULL);

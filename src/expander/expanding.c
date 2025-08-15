@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 16:35:21 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 23:48:38 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int		expand_verify(char *str, int *i, int *mode);
 char	*replacing(char *expanded, char *str, int *i, t_shell *shell);
+int		is_quoted(char *s, int i, int type, t_shell *shell);
 
 char	*expand(char *str, t_shell *shell, int mode)
 {
@@ -30,6 +31,7 @@ char	*expand(char *str, t_shell *shell, int mode)
 	{
 		if (expand_verify(str, &i, &mode))
 		{
+			is_quoted(str, i, 2, shell);
 			expanded = replacing(expanded, str, &i, shell);
 			if (!expanded)
 				return (NULL);
@@ -66,6 +68,26 @@ int	expand_verify(char *str, int *i, int *mode)
 		}
 		if (till_sep(str + *i + 1) && *mode != 1)
 			return (1);
+	}
+	return (0);
+}
+
+int	is_quoted(char *s, int i, int type, t_shell *shell)
+{
+	int		j;
+
+	j = -1;
+	while (s[++j])
+	{
+		if (is_quote(s[j]) == type)
+		{
+			while (s[j] && (is_quote(s[j]) != type || is_quote(s[j]) == 0))
+				j++;
+			if (s[j] && j < i)
+				j++;
+			else if (s[j])
+				return (shell->quoted = 1, 1);
+		}
 	}
 	return (0);
 }
