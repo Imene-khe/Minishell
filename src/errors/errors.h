@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:10 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 13:48:19 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:35:54 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	clear_exit(t_tree *tree, t_exec *ex, int code, char *source);
 void	print_error(char *msg, char *source);
 void	line_errors(t_line *line, int code);
-void	cmnd_errors(char *cmnd, int count);
+void	cmnd_errors(char *cmnd, int count, int code, t_exec *ex);
 void	cd_errors(t_shell *shell, char *file, int cwd);
 
 // Errors 2

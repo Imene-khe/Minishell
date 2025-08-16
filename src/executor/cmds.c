@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:22:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 16:14:26 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 17:41:12 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 char	**set_command(char *cmnd, char **paths, t_tree *args, t_exec *ex);
 void	reset_fds(t_exec *ex, int fds[4]);
+int		check_command(char *cmnd, t_exec *ex);
 
 int	exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run)
 {
@@ -37,7 +38,7 @@ int	exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run)
 	}
 	cmnd = set_command(tree->content, ex->paths, tree->right, ex);
 	if (!cmnd)
-		clear_exit(ex->tree, ex, 127, tree->content);
+		cmnd_errors(tree->content, 1, 127, ex);
 	env = env_to_arr(ex->shell->envp);
 	execution(ex, fds, cmnd, env);
 	return (0);
@@ -65,10 +66,8 @@ char	**set_command(char *cmnd, char **paths, t_tree *args, t_exec *ex)
 
 	if (!ft_strncmp(cmnd, "", 1))
 		return (NULL);
-	if (!ft_strncmp(cmnd, "./", 2) && !access(cmnd, X_OK))
+	if (check_command(cmnd, ex))
 		return (cmnd_split(cmnd, args, ex));
-	else if (!ft_strncmp(cmnd, "./", 2) && access(cmnd, X_OK) != 0)
-		return (clear_exit(ex->tree, ex, 126, cmnd), NULL);
 	while (*paths)
 	{
 		path = ft_strjoin(*(paths++), "/");
@@ -82,4 +81,22 @@ char	**set_command(char *cmnd, char **paths, t_tree *args, t_exec *ex)
 		free(path);
 	}
 	return (NULL);
+}
+
+int	check_command(char *cmnd, t_exec *ex)
+{
+	struct stat	st;
+
+	if (!ft_strncmp(cmnd, "./", 2) || cmnd[0] == '/')
+	{
+		if (stat(cmnd, &st) == -1)
+			cmnd_errors(cmnd, 0, 127, ex);
+		if (S_ISDIR(st.st_mode))
+			cmnd_errors(cmnd, 0, 126, ex);
+		if (access(cmnd, X_OK) != 0)
+			cmnd_errors(cmnd, 1, 126, ex);
+		else
+			return (1);
+	}
+	return (0);
 }
