@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 16:25:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 15:54:57 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:40:39 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "errors.h"
 
-void	exit_errors(char *arg)
+void	exit_errors(char *arg, t_shell *shell)
 {
 	if (!arg)
+	{
+		shell->status = 1;
 		ft_putstr_fd("minishishishi: exit: too many arguments\n", 2);
+	}
 	else
 	{
+		shell->status = 2;
 		ft_putstr_fd("minishishishi: exit: ", 2);
 		ft_putstr_fd(arg, 2);
 		ft_putstr_fd(": numeric argument required\n", 2);

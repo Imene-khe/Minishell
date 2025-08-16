@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 12:46:54 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 21:19:24 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:22:55 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*custom_strdup(const char *s, int ignore, int type)
 	j = 0;
 	while (i < slen)
 	{
-		if (check_quotes(s[i], &ignore, &type) || (count_quote(s, type) == 1))
+		if (check_quotes(s[i], &ignore, &type))
 			dup[j++] = s[i];
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 15:55:41 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 11:26:13 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	exit_built(t_tree *args, t_exec *ex, int *run)
 	{
 		first = args->content;
 		if (!ft_isalldigit(first) || too_big(first, ft_strlen(first)))
-			exit_errors(first);
+			exit_errors(first, ex->shell);
 		else if (count_elm(args, ARG) > 1)
 		{
-			exit_errors(NULL);
+			exit_errors(NULL, ex->shell);
 			*run = 1;
 		}
 		else
