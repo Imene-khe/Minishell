@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:44:40 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 23:49:12 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 19:05:23 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ char	*cut_spaces(char *str, t_shell *shell)
 	new = ft_calloc(sizeof(char), ft_strlen(str) + 1);
 	if (!new)
 		return (NULL);
+	if (str[i] == ' ' && !only_spaces(str + i, 0) && shell->quoted == 0)
+		new[j++] = ' ';
 	while (str[i])
 	{
 		while (str[i] && str[i] == ' ' && shell->quoted == 0)
@@ -79,7 +81,6 @@ char	*cut_spaces(char *str, t_shell *shell)
 		if (str[i] && !only_spaces(str + i, 0) && shell->quoted == 0)
 			new[j++] = ' ';
 	}
-	new[j] = '\0';
 	return (new);
 }
 

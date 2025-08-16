@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 17:22:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 17:41:12 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 19:47:54 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char	**set_command(char *cmnd, char **paths, t_tree *args, t_exec *ex)
 		return (NULL);
 	if (check_command(cmnd, ex))
 		return (cmnd_split(cmnd, args, ex));
+	if (!paths)
+		cmnd_errors(cmnd, 0, 127, ex);
 	while (*paths)
 	{
 		path = ft_strjoin(*(paths++), "/");

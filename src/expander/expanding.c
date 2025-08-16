@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 11:23:16 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 18:33:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*expand(char *str, t_shell *shell, int mode)
 	{
 		if (expand_verify(str, &i, &mode))
 		{
-			is_quoted(str, i, 2, shell);
+			is_quoted(str, i, 2, shell);	
 			expanded = replacing(expanded, str, &i, shell);
 			if (!expanded)
 				return (NULL);
@@ -85,7 +85,7 @@ int	is_quoted(char *s, int i, int type, t_shell *shell)
 				j++;
 			if (s[j] && j < i)
 				j++;
-			else if (s[j])
+			else if (s[j] && j > 1)
 				return (shell->quoted = 1, 1);
 		}
 	}
