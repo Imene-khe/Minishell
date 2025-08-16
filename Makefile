@@ -20,6 +20,7 @@ SRCS = $(addprefix src/, \
 						errors/errors1.c \
 						errors/errors2.c \
 						utils/split.c \
+						utils/split_again.c \
 						utils/tools1.c \
 						utils/tools2.c \
 						utils/tools3.c \

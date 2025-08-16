@@ -6,36 +6,35 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 22:13:16 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:32:58 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-t_line	*lexer_next(char **split, int *t, int *s, t_shell *shell);
+t_line	*lexer_next(char **split, int l[2], t_shell *shell);
 int		check_type(char *str, int *t, int *s, int interpret);
-t_line	*subsplit(char *str, int *t, int *s, int *j);
+t_line	*subsplit(char *str, int l[2], int *j, t_shell *shell);
 
 t_line	*lexer(char *prompt, t_shell *shell)
 {
 	t_line	*head;
 	char	**split;
-	int		t;
-	int		s;
+	int		l[2];
 
 	split = custom_split(prompt, ' ');
 	if (!split)
 		return (NULL);
-	t = 0;
-	s = 0;
-	head = lexer_next(split, &t, &s, shell);
+	l[0] = 0;
+	l[1] = 0;
+	head = lexer_next(split, l, shell);
 	free_arr(split, custom_countwords(prompt, ' '));
 	if (!head)
 		return (NULL);
 	return (head);
 }
 
-t_line	*lexer_next(char **split, int *t, int *s, t_shell *shell)
+t_line	*lexer_next(char **split, int l[2], t_shell *shell)
 {
 	t_line	*head;
 	t_line	*current;
@@ -52,10 +51,10 @@ t_line	*lexer_next(char **split, int *t, int *s, t_shell *shell)
 		expanded = expand(split[i], shell, 0);
 		if (!expanded)
 			return (line_free(head), NULL);
-		if (ft_countwords(expanded, ' ') <= 1 || *s)
-			current = line_new(expanded, check_type(expanded, t, s, 1), j++);
+		if (ft_countwords(expanded, ' ') <= 1 || l[1])
+			current = line_new(expanded, check_type(expanded, &l[0], &l[1], 1), j++);
 		else
-			current = subsplit(expanded, t, s, &j);
+			current = subsplit(expanded, l, &j, shell);
 		free(expanded);
 		if (!current)
 			return (line_free(head), NULL);
@@ -86,14 +85,14 @@ int	check_type(char *str, int *t, int *s, int interpret)
 	return (0);
 }
 
-t_line	*subsplit(char *str, int *t, int *s, int *j)
+t_line	*subsplit(char *str, int l[2], int *j, t_shell *shell)
 {
 	t_line	*new;
 	t_line	*current;
 	int		i;
 	char	**subsplit;
 
-	subsplit = custom_split(str, ' ');
+	subsplit = another_split(str, ' ', shell);
 	if (!subsplit)
 		return (NULL);
 	new = NULL;
@@ -101,7 +100,7 @@ t_line	*subsplit(char *str, int *t, int *s, int *j)
 	while (subsplit[i])
 	{
 		current
-			= line_new(subsplit[i], check_type(subsplit[i], t, s, 0), (*j)++);
+			= line_new(subsplit[i], check_type(subsplit[i], &l[0], &l[1], 0), (*j)++);
 		if (!current)
 			return (free_arr(subsplit, ft_countwords(str, ' ')), NULL);
 		line_add_back(&new, &current);

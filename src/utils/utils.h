@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:35:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 18:56:06 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 00:25:07 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 // Split
 int		custom_countwords(char *str, char sep);
 char	**custom_split(char *str, char sep);
+
+// Split Again
+char	**another_split(char *str, char sep, t_shell *shell);
 
 // Tools 1
 int		only_spaces(char *str, int step);
