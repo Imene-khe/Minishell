@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 23:30:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 14:37:02 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/15 22:57:11 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/minishell.h"
 #include "signals.h"
 
 int	g_signal = 0;

@@ -40,15 +40,23 @@ LIBFT = include/libft/libft.a
 
 FLAGS = -Wall -Wextra -Werror
 
+# Chemins Readline (Apple Silicon & Intel Homebrew)
+
+
+
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@cc -o $@ $^ -L include/libft -lft -lreadline -lhistory
+	@cc -o $@ $^ \
+		-L include/libft -lft \
+		$(READLINE_LIB) $(READLINE_RPATH) \
+		-lreadline -lhistory
 	@echo COMPILED
+
 
 objs/%.o: src/%.c
 	@mkdir -p $(dir $@)
-	@cc $(FLAGS) -I include/libft -c $< -o $@
+	@cc $(FLAGS) -I include -I include/libft $(READLINE_INC) -c $< -o $@
 
 $(LIBFT):
 	@$(MAKE) -C include/libft

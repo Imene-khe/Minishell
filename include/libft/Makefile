@@ -60,25 +60,26 @@ BONUS = ft_lstnew_bonus.c \
 BONUS_OBJS = $(BONUS:%.c=obj/%.o)
 
 CC = cc
-CFLAG = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS) libft.h
+	@ar rcs $(NAME) $(OBJS)
 
-bonus: $(OBJS) $(BONUS_OBJS) $(NAME)
-	@ar rcs $(NAME) $(BONUS) $(OBJS) $(BONUS_OBJS) libft.h
+bonus: $(OBJS) $(BONUS_OBJS)
+	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 obj/%.o: %.c
 	@mkdir -p obj
-	@$(CC) $(CFLAG) -c $< -o $@
+	@$(CC) $(CFLAGS) -I. -c $< -o $@
 
 clean:
 	@rm -rf obj
-	@rm -f $(OBJS) $(BONUS_OBJS)
 
 fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re bonus
