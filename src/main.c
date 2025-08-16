@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 16:55:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 12:00:05 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 12:34:23 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	next(t_shell *shell)
 	setup_signals_interactive();
 	run = 1;
 	while (run)
-	{prompt = readline("minishishishi > ");
+	{
+		prompt = readline("minishishishi > ");
 		if (!prompt)
 			exit_built(NULL, NULL, &run);
 		if (run && !only_spaces(prompt, 1) && ft_strlen(prompt) > 0)

@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/11 23:28:06 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:24:29 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 		else
 			tmp_fd = open(right_content, O_RDONLY);
 		if (tmp_fd < 0)
-			return (print_error("No such file or directory", right_content), 0);
+			return (redir_errors(ex->shell, right_content, "No such file or directory"), 0);
 		assign_fd(ex, in, 0, tmp_fd);
 	}
 	else if (tree->type == REDIR_OUT)
@@ -57,7 +57,7 @@ int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 		else
 			tmp_fd = open(right_content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (tmp_fd < 0)
-			return (print_error("Cannot open file", right_content), 0);
+			return (redir_errors(ex->shell, right_content, "No such file or directory"), 0);
 		assign_fd(ex, out, 1, tmp_fd);
 	}
 	return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:52:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 14:37:54 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 13:57:41 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,12 @@ int	exec(t_tree *tree, t_exec *ex, int count, int *run)
 	if (*run == 1)
 	{
 		if (!try_open(tree, ex, &in, &out))
-			return (0);
+		{
+			if (ex->need_fork)
+				return (free_structs(ex->tree, ex, 1), exit(1), 0);
+			else
+				return (0);
+		}
 		if (ex->need_pipe)
 			set_fds(ex, count);
 	}

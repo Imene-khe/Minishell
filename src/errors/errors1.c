@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 15:16:07 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 13:25:35 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,6 @@ void	clear_exit(t_tree *tree, t_exec *ex, int code, char *source)
 
 void	print_error(char *msg, char *source)
 {
-	if (!ft_strcmp(msg, "No such file or directory")
-		|| !ft_strcmp(msg, "Cannot open file"))
-	{
-		ft_putstr_fd("minishishishi: ", 2);
-		ft_putstr_fd(source, 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(msg, 2);
-		ft_putstr_fd("\n", 2);
-		return ;
-	}
 	ft_putstr_fd("Error: ", 2);
 	ft_putstr_fd(source, 2);
 	ft_putstr_fd(" - ", 2);

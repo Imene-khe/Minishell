@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:10 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 11:25:44 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 13:48:19 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ void	cd_errors(t_shell *shell, char *file, int cwd);
 void	exit_errors(char *arg, t_shell *shell);
 void	env_errors(t_shell *shell, char *arg);
 void	export_errors(t_shell *shell, char *arg);
+void	redir_errors(t_shell *shell, char *source, char *msg);
 
 #endif

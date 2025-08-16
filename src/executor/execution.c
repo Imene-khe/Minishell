@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:51:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 14:53:19 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 13:57:56 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	waiting(t_exec *ex)
 	}
 }
 
-void	execution(t_exec *ex, int fds[2], char **cmnd, char **env)
+void	execution(t_exec *ex, int fds[4], char **cmnd, char **env)
 {
 	if (execve(cmnd[0], cmnd, env) < 0)
 	{
@@ -46,7 +46,7 @@ void	execution(t_exec *ex, int fds[2], char **cmnd, char **env)
 	}
 }
 
-void	dups(t_exec *ex, int fd, int fds[2], int dupped)
+void	dups(t_exec *ex, int fd, int fds[4], int dupped)
 {
 	if (dup2(fd, dupped) < 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 16:25:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 11:40:39 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/16 13:48:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ void	export_errors(t_shell *shell, char *arg)
 		ft_putstr_fd("\'", 2);
 		ft_putstr_fd(": not a valid identifier\n", 2);
 	}
+}
+
+void	redir_errors(t_shell *shell, char *source, char *msg)
+{
+	shell->status = 1;
+	ft_putstr_fd("minishishishi: ", 2);
+	ft_putstr_fd(source, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
 }
