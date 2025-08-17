@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 14:24:29 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 18:29:07 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		opening(t_tree *tree, t_exec *ex, int *in, int *out);
 void	assign_fd(t_exec *ex, int *fd_count, int in_out, int tmp_fd);
 int		manage_heredoc(t_tree *tree, t_exec *ex);
+char	*expand_buff(char *buff, int pip[2], t_exec *ex);
 
 int	try_open(t_tree *tree, t_exec *ex, int *in, int *out)
 {
@@ -28,7 +29,7 @@ int	try_open(t_tree *tree, t_exec *ex, int *in, int *out)
 		if (ex->out_redirs == 0)
 			ex->out_redirs = count_elm(tree, REDIR_OUT);
 		ret = opening(tree, ex, in, out);
-		if (ret)
+		if (ret && tree->left)
 			ret = try_open(tree->left, ex, in, out);
 	}
 	return (ret);
@@ -93,6 +94,7 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	{
 		if (buff)
 		{
+			buff = expand_buff(buff, pip, ex);
 			if (write(pip[1], buff, ft_strlen(buff)) < 0
 				|| write(pip[1], "\n", 1) < 0)
 				return (free(buff), close_fds(pip),
@@ -105,4 +107,16 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	}
 	close(pip[1]);
 	return (free(buff), pip[0]);
+}
+
+char	*expand_buff(char *buff, int pip[2], t_exec *ex)
+{
+	char	*expanded;
+
+	expanded = expand(buff, ex->shell, 0);
+	free(buff);
+	if (!expanded)
+		return (close_fds(pip),
+			clear_exit(ex->tree, ex, 1, "expand"), NULL);
+	return (expanded);
 }

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:52:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 19:46:41 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 18:15:39 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+
+int	verify_fds(t_exec *ex);
 
 t_exec	*init_exec(t_tree *tree, t_exec *exec, t_shell *shell)
 {
@@ -74,12 +76,8 @@ int	exec(t_tree *tree, t_exec *ex, int count, int *run)
 	if (*run == 1)
 	{
 		if (!try_open(tree, ex, &in, &out))
-		{
-			if (ex->need_fork)
-				return (free_structs(ex->tree, ex, 1), exit(1), 0);
-			else
+			if (!verify_fds(ex))
 				return (0);
-		}
 		if (ex->need_pipe)
 			set_fds(ex, count);
 	}
@@ -91,4 +89,12 @@ int	exec(t_tree *tree, t_exec *ex, int count, int *run)
 	if (curr)
 		return (exec_cmd(curr, ex, count, run));
 	return (0);
+}
+
+int	verify_fds(t_exec *ex)
+{
+	if (ex->need_fork)
+		return (free_structs(ex->tree, ex, 1), exit(1), 0);
+	else
+		return (0);
 }
