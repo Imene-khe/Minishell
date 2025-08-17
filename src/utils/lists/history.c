@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 14:49:39 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 23:27:35 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:33:32 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ void	history_addback(t_history **history, t_history *new)
 
 void	built_history(t_history *history, t_shell **shell, t_tree *args)
 {
-	t_history	*curr;
-
 	(*shell)->status = 0;
-	curr = history;
 	if (count_elm(args, ARG) > 0)
 	{
 		if (ft_strcmp(args->content, "-c") == 0)

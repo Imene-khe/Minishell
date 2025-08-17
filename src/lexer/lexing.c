@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 23:23:02 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:32:38 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_line	*lexer_next(char **split, int l[2], t_shell *shell)
 	t_line	*curr;
 	int		i;
 	int		j;
-	char	*expand;
+	char	*exp;
 
 	i = -1;
 	j = 0;
@@ -48,14 +48,14 @@ t_line	*lexer_next(char **split, int l[2], t_shell *shell)
 	while (split[++i])
 	{
 		shell->quoted = 0;
-		expand = expanded(split[i], shell, 0);
-		if (!expand)
+		exp = expand(split[i], shell, 0);
+		if (!exp)
 			return (line_free(head), NULL);
-		if (ft_countwords(expand, ' ') <= 1 || l[1])
-			curr = line_new(expand, check_type(expand, &l[0], &l[1], 1), j++);
+		if (ft_countwords(exp, ' ') <= 1 || l[1])
+			curr = line_new(exp, check_type(exp, &l[0], &l[1], 1), j++);
 		else
-			curr = subsplit(expand, l, &j, shell);
-		free(expand);
+			curr = subsplit(exp, l, &j, shell);
+		free(exp);
 		if (!curr)
 			return (line_free(head), NULL);
 		line_add_back(&head, &curr);
