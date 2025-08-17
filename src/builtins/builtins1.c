@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 16:40:30 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 18:37:45 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	pwd(t_exec *ex, t_tree *arg)
 	char	*buff;
 
 	ex->shell->status = 0;
-	if (arg->content[0] == '-' && ft_strlen(arg->content) > 1)
+	if (arg && arg->content[0] == '-' && ft_strlen(arg->content) > 1)
 	{
 		ex->shell->status = 1;
 		ft_putstr_fd("minishishishi: ", 2);
