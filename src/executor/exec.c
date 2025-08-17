@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:52:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 18:15:39 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 19:09:44 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,26 @@ int	verify_fds(t_exec *ex)
 		return (free_structs(ex->tree, ex, 1), exit(1), 0);
 	else
 		return (0);
+}
+
+int	open_files(t_tree *tree, t_exec *ex, int count, char *cont)
+{
+	int	tmp_fd;
+
+	tmp_fd = 0;
+	if (count == 1)
+	{
+		if (ft_strcmp(tree->content, "<<") == 0)
+			tmp_fd = manage_heredoc(tree, ex);
+		else
+			tmp_fd = open(cont, O_RDONLY);
+	}
+	else if (count == 2)
+	{
+		if (ft_strcmp(tree->content, ">>") == 0)
+			tmp_fd = open(cont, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else
+			tmp_fd = open(cont, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
+	return (tmp_fd);
 }

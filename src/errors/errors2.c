@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 16:25:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 15:29:45 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:19:44 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	history_errors(t_shell *shell, char *source, int count)
 	if (!source && count == 0)
 		ft_putstr_fd("no options managed\n", 2);
 	else if (!source && count == 1)
-		ft_putstr_fd("too many arguments\n",2);
+		ft_putstr_fd("too many arguments\n", 2);
 	else
 	{
 		ft_putstr_fd(source, 2);

@@ -6,12 +6,11 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:09:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 15:05:52 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:17:35 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-#include "signals/signals2.c"
 
 void	prep_exec(t_tree *tree, int *run, t_shell *shell);
 int		verify_line(t_line *line, t_line *head, int prio);

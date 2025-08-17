@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 18:29:07 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:23:38 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		opening(t_tree *tree, t_exec *ex, int *in, int *out);
 void	assign_fd(t_exec *ex, int *fd_count, int in_out, int tmp_fd);
-int		manage_heredoc(t_tree *tree, t_exec *ex);
 char	*expand_buff(char *buff, int pip[2], t_exec *ex);
 
 int	try_open(t_tree *tree, t_exec *ex, int *in, int *out)
@@ -38,27 +37,26 @@ int	try_open(t_tree *tree, t_exec *ex, int *in, int *out)
 int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 {
 	int		tmp_fd;
-	char	*right_content;
+	char	*r;
 
-	right_content = tree->right->content;
+	r = tree->right->content;
 	if (tree->type == REDIR_IN)
 	{
-		if (ft_strcmp(tree->content, "<<") == 0)
-			tmp_fd = manage_heredoc(tree, ex);
-		else
-			tmp_fd = open(right_content, O_RDONLY);
-		if (tmp_fd < 0)
-			return (redir_errors(ex->shell, right_content, "No such file or directory"), 0);
+		if (ft_strcmp(tree->content, "<<") && (access(r, F_OK) != 0
+				|| access(r, R_OK) != 0))
+			return (redir_errors(ex->shell, r, "Permission denied"), 0);
+		tmp_fd = open_files(tree, ex, 1, r);
+		if (tmp_fd < 0 && !ex->shell->status)
+			return (redir_errors(ex->shell, r, "No such file or directory"), 0);
 		assign_fd(ex, in, 0, tmp_fd);
 	}
 	else if (tree->type == REDIR_OUT)
 	{
-		if (ft_strcmp(tree->content, ">>") == 0)
-			tmp_fd = open(right_content, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		else
-			tmp_fd = open(right_content, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (access(r, F_OK) == 0 && access(r, W_OK) != 0)
+			return (redir_errors(ex->shell, r, "Permission denied"), 0);
+		tmp_fd = open_files(tree, ex, 2, r);
 		if (tmp_fd < 0)
-			return (redir_errors(ex->shell, right_content, "No such file or directory"), 0);
+			return (redir_errors(ex->shell, r, "No such file or directory"), 0);
 		assign_fd(ex, out, 1, tmp_fd);
 	}
 	return (1);

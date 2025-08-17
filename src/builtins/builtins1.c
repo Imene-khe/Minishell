@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 18:37:45 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:18:42 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	builtins(t_tree *tree, t_exec *ex, int count, int *run)
 	if (!ft_strcmp(tree->content, "exit"))
 		return (exit_built(tree->right, ex, run), 1);
 	if (!ft_strcmp(tree->content, "history"))
-		return (built_history(ex->shell->history, &(ex->shell), tree->right), 1);
+		return (built_history(ex->shell->history,
+				&(ex->shell), tree->right), 1);
 	return (0);
 }
 
@@ -72,7 +73,7 @@ void	pwd(t_exec *ex, t_tree *arg)
 		ft_putstr_fd("minishishishi: ", 2);
 		ft_putstr_fd(arg->content, 2);
 		ft_putstr_fd(": invalid option\n", 2);
-		return ;	
+		return ;
 	}
 	buff = malloc(PATH_SIZE);
 	if (!buff)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:29 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 21:14:16 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:18:14 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void	export_args(t_tree *args, t_shell *shell, t_exec *ex)
 		name = ft_strndup(curr->content, size);
 		if (!name)
 			return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
-		if (!ft_isallalnum(name) || (size >= 1 && ft_isdigit(name[0])) || size == 0)
+		if (!ft_isallalnum(name) || (size >= 1 && ft_isdigit(name[0]))
+			|| size == 0)
 			export_errors(shell, curr->content);
 		else
 			verify_export(curr, shell, ex, name);
@@ -119,7 +120,8 @@ void	verify_export(t_tree *curr, t_shell *shell, t_exec *ex, char *name)
 		{
 			tmp->value = ft_strdup(ft_strchr(curr->content, '=') + 1);
 			if (!tmp->value)
-				return (shell->status = 1, clear_exit(ex->tree, ex, 1, "export"));
+				return (shell->status = 1,
+						clear_exit(ex->tree, ex, 1, "export"));
 		}
 	}
 }

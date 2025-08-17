@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:53:05 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 13:15:09 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 20:22:36 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ t_exec	*init_exec(t_tree *tree, t_exec *exec, t_shell *shell);
 int		pre_exec(t_tree *tree, t_exec *ex, int *run);
 int		exec(t_tree *tree, t_exec *ex, int count, int *run);
 void	free_shell(t_shell *shell);
+int		open_files(t_tree *tree, t_exec *ex, int count, char *cont);
 
 // Cmnds
 int		exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run);
 
 // Redir
 int		try_open(t_tree *tree, t_exec *ex, int *in, int *out);
+int		manage_heredoc(t_tree *tree, t_exec *ex);
 
 // Pipe
 void	manage_pipes(t_tree *tree, t_exec *ex, int *run);
@@ -38,6 +40,6 @@ void	waiting(t_exec *ex);
 void	execution(t_exec *ex, int fds[4], char **cmnd, char **env);
 void	dups(t_exec *ex, int fd, int fds[4], int dupped);
 int		need_fork(t_exec *ex, t_tree *tree);
-int 	forking(t_exec *ex, t_tree *tree, int count, int *run);
+int		forking(t_exec *ex, t_tree *tree, int count, int *run);
 
 #endif
