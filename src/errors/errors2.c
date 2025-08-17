@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 16:25:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 13:48:24 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:29:45 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,22 @@ void	redir_errors(t_shell *shell, char *source, char *msg)
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
+}
+
+void	history_errors(t_shell *shell, char *source, int count)
+{
+	ft_putstr_fd("minishishishi: history: ", 2);
+	shell->status = 1;
+	if (!source && count == 0)
+		ft_putstr_fd("no options managed\n", 2);
+	else if (!source && count == 1)
+		ft_putstr_fd("too many arguments\n",2);
+	else
+	{
+		ft_putstr_fd(source, 2);
+		if (count == 0)
+			ft_putstr_fd(": numeric argument required\n", 2);
+		else if (count == 1)
+			ft_putstr_fd(": invalid option\n", 2);
+	}
 }

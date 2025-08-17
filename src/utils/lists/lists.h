@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:21:16 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/07/23 17:00:48 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:44:36 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,15 @@
 # include "../../../include/minishell.h"
 # include "../../../include/structs.h"
 
+// Line
 t_line	*line_new(char *content, int type, int nb);
 void	line_add_back(t_line **head, t_line **new);
 void	line_free(t_line *head);
 int		line_size(t_line *line);
+
+// Hisotry
+void	ft_add_history(char *command, t_shell *shell);
+void	built_history(t_history *history, t_shell **shell, t_tree *args);
+void	history_free(t_history *history);
 
 #endif

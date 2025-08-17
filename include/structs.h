@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:15:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 22:12:51 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 14:48:41 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,18 @@ typedef struct s_tree
 
 typedef struct s_shell
 {
-	t_env			*envp;
-	int				status;
-	int				quoted;
+	t_env				*envp;
+	int					status;
+	int					quoted;
+	struct s_history	*history;
 }					t_shell;
+
+typedef struct s_history
+{
+	int					id;
+	char				*command;
+	struct s_history	*next;
+}						t_history;
 
 typedef struct s_exec
 {

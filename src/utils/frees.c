@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:17:14 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 17:46:19 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:35:23 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	free_shell(t_shell *shell)
 {
 	if (shell->envp)
 		env_free(shell->envp);
+	if (shell->history)
+		history_free(shell->history);
 	free(shell);
 }
 

@@ -28,6 +28,7 @@ SRCS = $(addprefix src/, \
 						utils/custom_strdup.c \
 						utils/custom_strjoin.c \
 						utils/lists/line.c \
+						utils/lists/history.c \
 						environment/env1.c \
 						environment/env2.c \
 						environment/env3.c \

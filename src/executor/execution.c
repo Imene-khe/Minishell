@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 16:51:01 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 13:57:56 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 17:03:49 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	need_fork(t_exec *ex, t_tree *tree)
 		&& ft_strcmp(curr->content, "exit")
 		&& ft_strcmp(curr->content, "env")
 		&& ft_strcmp(curr->content, "pwd")
-		&& ft_strcmp(curr->content, "echo"))
+		&& ft_strcmp(curr->content, "echo")
+		&& ft_strcmp(curr->content, "history"))
 		return (1);
 	return (0);
 }

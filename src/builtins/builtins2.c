@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 12:54:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 11:26:13 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 14:27:17 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,23 @@ void	print_env(t_exec *ex)
 
 void	unset(t_tree *arg, t_shell *shell)
 {
+	char	*name;
+	t_tree	*curr;
+
 	shell->status = 0;
-	if (!arg)
-		return ;
-	if (arg->content[0] == '-' && ft_strlen(arg->content) > 1)
+	curr = arg;
+	while (curr)
 	{
-		shell->status = 1;
-		printf("minishishishi: unset: no options managed\n");
+		name = curr->content;
+		if (name[0] == '-' && ft_strlen(name) > 1)
+		{
+			shell->status = 1;
+			printf("minishishishi: unset: no options managed\n");
+		}
+		else
+			env_delete(shell->envp, env_find(shell->envp, name));
+		curr = curr->right;
 	}
-	else
-		env_delete(shell->envp, env_find(shell->envp, arg->content));
 }
 
 void	export(t_tree *args, t_shell *shell, t_exec *ex)

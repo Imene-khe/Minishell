@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 18:09:41 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 13:36:13 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 15:05:52 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	treatment(char *prompt, int *run, t_shell *shell)
 	t_line	*line;
 	t_tree	*tree;
 
-	add_history(prompt);
+	ft_add_history(prompt, shell);
 	if (closed(prompt))
 	{
 		line = lexer(prompt, shell);
@@ -69,8 +69,6 @@ int	verify_line(t_line *line, t_line *head, int prio)
 {
 	int	ret;
 
-	if (line_size(line) == 1 && ft_strlen(line->content) == 0)
-		return (0);
 	if (!line && prio != 1)
 		return (verify_line(head, head, prio - 1));
 	if (!line)

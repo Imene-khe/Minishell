@@ -6,7 +6,7 @@
 /*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 14:45:21 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:40:30 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	builtins(t_tree *tree, t_exec *ex, int count, int *run)
 		return (export(tree->right, ex->shell, ex), 1);
 	if (!ft_strcmp(tree->content, "exit"))
 		return (exit_built(tree->right, ex, run), 1);
+	if (!ft_strcmp(tree->content, "history"))
+		return (built_history(ex->shell->history, &(ex->shell), tree->right), 1);
 	return (0);
 }
 
