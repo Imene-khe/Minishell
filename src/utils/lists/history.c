@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 14:49:39 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 17:03:54 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:27:35 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	ft_add_history(char *command, t_shell *shell)
 	new_node = malloc(sizeof(t_history));
 	if (!new_node)
 		return (free(command), free_shell(shell),
-				print_error("Malloc failed", "history"), exit(1));
+			print_error("Malloc failed", "history"), exit(1));
 	new_node->command = ft_strdup(command);
 	if (!new_node->command)
 		return (free(new_node), free(command), free_shell(shell),
-				print_error("Malloc failed", "history"), exit(1));
+			print_error("Malloc failed", "history"), exit(1));
 	history_addback(&shell->history, new_node);
 	add_history(command);
 }
@@ -68,7 +68,8 @@ void	built_history(t_history *history, t_shell **shell, t_tree *args)
 		}
 		if (args->content[0] == '-' && ft_strlen(args->content) > 1)
 			return (history_errors((*shell), NULL, 0));
-		if (!ft_isalldigit(args->content) || too_big(args->content, ft_strlen(args->content)))
+		if (!ft_isalldigit(args->content)
+			|| too_big(args->content, ft_strlen(args->content)))
 			return (history_errors((*shell), args->content, 0));
 		if (count_elm(args, ARG) > 1)
 			return (history_errors((*shell), NULL, 1));

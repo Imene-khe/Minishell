@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 23:30:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/15 13:02:21 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:28:31 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	sigint_interactive(int signo)
 	rl_on_new_line();
 	rl_redisplay();
 }
+
 void	setup_signals_interactive(void)
 {
 	signal(SIGINT, sigint_interactive);

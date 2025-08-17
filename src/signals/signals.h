@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhelil <ikhelil@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 14:14:52 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/14 21:19:53 by ikhelil          ###   ########.fr       */
+/*   Updated: 2025/08/17 23:28:43 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <sys/wait.h>
-#include "../../include/structs.h"
+# include "../../include/structs.h"
 
 extern int	g_signal;
 

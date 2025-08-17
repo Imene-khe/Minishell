@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:15:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 11:22:40 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:23:02 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ t_line	*lexer(char *prompt, t_shell *shell)
 t_line	*lexer_next(char **split, int l[2], t_shell *shell)
 {
 	t_line	*head;
-	t_line	*current;
+	t_line	*curr;
 	int		i;
 	int		j;
-	char	*expanded;
+	char	*expand;
 
 	i = -1;
 	j = 0;
@@ -48,17 +48,17 @@ t_line	*lexer_next(char **split, int l[2], t_shell *shell)
 	while (split[++i])
 	{
 		shell->quoted = 0;
-		expanded = expand(split[i], shell, 0);
-		if (!expanded)
+		expand = expanded(split[i], shell, 0);
+		if (!expand)
 			return (line_free(head), NULL);
-		if (ft_countwords(expanded, ' ') <= 1 || l[1])
-			current = line_new(expanded, check_type(expanded, &l[0], &l[1], 1), j++);
+		if (ft_countwords(expand, ' ') <= 1 || l[1])
+			curr = line_new(expand, check_type(expand, &l[0], &l[1], 1), j++);
 		else
-			current = subsplit(expanded, l, &j, shell);
-		free(expanded);
-		if (!current)
+			curr = subsplit(expand, l, &j, shell);
+		free(expand);
+		if (!curr)
 			return (line_free(head), NULL);
-		line_add_back(&head, &current);
+		line_add_back(&head, &curr);
 	}
 	return (head);
 }
@@ -90,22 +90,22 @@ t_line	*subsplit(char *str, int l[2], int *j, t_shell *shell)
 	t_line	*new;
 	t_line	*current;
 	int		i;
-	char	**subsplit;
+	char	**sub;
 
-	subsplit = another_split(str, ' ', shell);
-	if (!subsplit)
+	sub = another_split(str, ' ', shell);
+	if (!sub)
 		return (NULL);
 	new = NULL;
 	i = 0;
-	while (subsplit[i])
+	while (sub[i])
 	{
 		current
-			= line_new(subsplit[i], check_type(subsplit[i], &l[0], &l[1], 0), (*j)++);
+			= line_new(sub[i], check_type(sub[i], &l[0], &l[1], 0), (*j)++);
 		if (!current)
-			return (free_arr(subsplit, ft_countwords(str, ' ')), NULL);
+			return (free_arr(sub, ft_countwords(str, ' ')), NULL);
 		line_add_back(&new, &current);
 		i++;
 	}
-	free_arr(subsplit, ft_countwords(str, ' '));
+	free_arr(sub, ft_countwords(str, ' '));
 	return (new);
 }

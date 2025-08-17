@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:29 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 20:18:14 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:23:40 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	verify_export(t_tree *curr, t_shell *shell, t_exec *ex, char *name)
 			tmp->value = ft_strdup(ft_strchr(curr->content, '=') + 1);
 			if (!tmp->value)
 				return (shell->status = 1,
-						clear_exit(ex->tree, ex, 1, "export"));
+					clear_exit(ex->tree, ex, 1, "export"));
 		}
 	}
 }

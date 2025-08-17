@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 18:01:38 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 11:21:31 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:26:54 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*custom_cpytillsep(char const *s, char c, int ignore)
 	if (!str)
 		return (NULL);
 	i = 0;
-	while (i < len  && (s[i] != c || ignore))
+	while (i < len && (s[i] != c || ignore))
 	{
 		str[i] = s[i];
 		set_ignore(&ignore, s[i++]);

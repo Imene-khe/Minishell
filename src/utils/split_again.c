@@ -6,14 +6,14 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 00:18:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 00:29:31 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/17 23:26:18 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static char	**another_alloc(char const *s, char c, char **split, t_shell *shell);
-static char	*another_cpytillsep(char const *s, char c, int ignore, t_shell *shell);
+char	**another_alloc(char *s, char c, char **split, t_shell *shell);
+char	*another_cpytillsep(char *s, char c, int ignore, t_shell *shell);
 
 char	**another_split(char *str, char sep, t_shell *shell)
 {
@@ -28,7 +28,7 @@ char	**another_split(char *str, char sep, t_shell *shell)
 	return (split);
 }
 
-static char	**another_alloc(char const *s, char c, char **split, t_shell *shell)
+char	**another_alloc(char *s, char c, char **split, t_shell *shell)
 {
 	int		i;
 	int		j;
@@ -47,17 +47,17 @@ static char	**another_alloc(char const *s, char c, char **split, t_shell *shell)
 			if (is_sep(s + i))
 				i += is_sep(s + i);
 			else
-				while (s[i] && ((s[i] != c && !is_sep(s + i)) || ignore || shell->quoted))
+				while (s[i] && ((s[i] != c && !is_sep(s + i))
+						|| ignore || shell->quoted))
 					set_ignore(&ignore, s[i++]);
 		}
 		else
 			i++;
 	}
-	split[j] = 0;
 	return (split);
 }
 
-static char	*another_cpytillsep(char const *s, char c, int ignore, t_shell *shell)
+char	*another_cpytillsep(char *s, char c, int ignore, t_shell *shell)
 {
 	int		i;
 	int		len;
@@ -67,9 +67,10 @@ static char	*another_cpytillsep(char const *s, char c, int ignore, t_shell *shel
 	if (is_sep(s))
 		len += is_sep(s);
 	else
-		while (s[len] && ((s[len] != c && !is_sep(s + len)) || ignore || shell->quoted))
+		while (s[len] && ((s[len] != c && !is_sep(s + len))
+				|| ignore || shell->quoted))
 			set_ignore(&ignore, s[len++]);
-	str = malloc(sizeof(char) * (len + 1));
+	str = ft_calloc(sizeof(char), len + 1);
 	if (!str)
 		return (NULL);
 	i = 0;
