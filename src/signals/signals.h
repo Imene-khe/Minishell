@@ -19,12 +19,13 @@
 # include <readline/history.h>
 # include <unistd.h>
 # include <sys/wait.h>
+#include "../../include/structs.h"
 
 extern int	g_signal;
 
 void	setup_signals_interactive(void);
 void	setup_signals_child(void);
-int		interpret_wait_status(int wstatus);
+int		interpret_wait_status(int wstatus, int i);
 void	parent_exec_signals_begin(void);
 void	parent_exec_signals_end(void);
 

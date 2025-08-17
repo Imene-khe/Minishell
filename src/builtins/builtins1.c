@@ -19,7 +19,7 @@ int	builtins(t_tree *tree, t_exec *ex, int count, int *run)
 	if (!ft_strcmp(tree->content, "echo"))
 		return (echo(tree->right, ex), 1);
 	if (!ft_strcmp(tree->content, "pwd"))
-		return (pwd(ex), 1);
+		return (pwd(ex, tree->right), 1);
 	if (!ft_strcmp(tree->content, "env"))
 		return (env(tree->right, ex, count, run), 1);
 	if (!ft_strcmp(tree->content, "cd"))
@@ -61,10 +61,19 @@ void	echo(t_tree *args, t_exec *ex)
 	ex->shell->status = 0;
 }
 
-void	pwd(t_exec *ex)
+void	pwd(t_exec *ex, t_tree *arg)
 {
 	char	*buff;
 
+	ex->shell->status = 0;
+	if (arg->content[0] == '-' && ft_strlen(arg->content) > 1)
+	{
+		ex->shell->status = 1;
+		ft_putstr_fd("minishishishi: ", 2);
+		ft_putstr_fd(arg->content, 2);
+		ft_putstr_fd(": invalid option\n", 2);
+		return ;	
+	}
 	buff = malloc(PATH_SIZE);
 	if (!buff)
 		clear_exit(ex->tree, ex, 1, "pwd");

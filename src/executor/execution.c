@@ -31,7 +31,7 @@ void	waiting(t_exec *ex)
 				ex->shell->status = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 				ex->shell->status = 128 + WTERMSIG(status);
-			ex->shell->status = interpret_wait_status(status);
+			ex->shell->status = interpret_wait_status(status, i);
 		}
 		i++;
 	}
