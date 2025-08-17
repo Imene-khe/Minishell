@@ -11,8 +11,9 @@
 /* ************************************************************************** */
 
 #include "signals.h"
+#include "../../include/structs.h"
 
-int	g_signal = 0;
+int	g_signal = -1;
 
 static void	sigint_interactive(int signo)
 {
@@ -35,7 +36,7 @@ void	setup_signals_child(void)
 	signal(SIGQUIT, SIG_DFL);
 }
 
-int	interpret_wait_status(int wstatus)
+int	interpret_wait_status(int wstatus, int i)
 {
 	int	sig;
 
@@ -47,7 +48,10 @@ int	interpret_wait_status(int wstatus)
 		if (sig == SIGQUIT)
 			write(2, "Quit (core dumped)\n", 19);
 		else if (sig == SIGINT)
-			write(2, "\n", 1);
+		{
+			if (i == 0)
+				write(2, "\n", 1);
+		}
 		return (128 + sig);
 	}
 	return (0);

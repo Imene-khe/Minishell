@@ -18,7 +18,7 @@
 // Builtins 1
 int		builtins(t_tree *tree, t_exec *ex, int count, int *run);
 void	echo(t_tree *args, t_exec *ex);
-void	pwd(t_exec *ex);
+void	pwd(t_exec *ex, t_tree *arg);
 void	cd(t_tree *args, t_exec *ex);
 
 // Builtins 2

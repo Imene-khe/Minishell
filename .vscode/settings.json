@@ -20,7 +20,9 @@
     "initializer_list": "c",
     "ranges": "c",
     "span": "c",
-    "utility": "c"
+    "utility": "c",
+    "history.h": "c",
+    "wait.h": "c"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
