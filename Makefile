@@ -10,6 +10,7 @@ SRCS = $(addprefix src/, \
 						parser/paths.c \
 						executor/exec.c \
 						executor/redir.c \
+						executor/heredoc.c \
 						executor/pipe.c \
 						executor/cmds.c \
 						executor/execution.c \

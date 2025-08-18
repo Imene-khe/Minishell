@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 23:30:55 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 23:28:31 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 12:06:50 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	g_signal = -1;
 
-static void	sigint_interactive(int signo)
+void	sigint_interactive(int signo)
 {
 	(void)signo;
 	g_signal = SIGINT;

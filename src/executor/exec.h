@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:53:05 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 20:22:36 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 12:32:25 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_exec	*init_exec(t_tree *tree, t_exec *exec, t_shell *shell);
 int		pre_exec(t_tree *tree, t_exec *ex, int *run);
 int		exec(t_tree *tree, t_exec *ex, int count, int *run);
 void	free_shell(t_shell *shell);
-int		open_files(t_tree *tree, t_exec *ex, int count, char *cont);
 
 // Cmnds
 int		exec_cmd(t_tree	*tree, t_exec *ex, int count, int *run);

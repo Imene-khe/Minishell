@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 20:23:38 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 16:19:15 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
 int		opening(t_tree *tree, t_exec *ex, int *in, int *out);
+int		open_files(t_tree *tree, t_exec *ex, int count, char *cont);
 void	assign_fd(t_exec *ex, int *fd_count, int in_out, int tmp_fd);
-char	*expand_buff(char *buff, int pip[2], t_exec *ex);
 
 int	try_open(t_tree *tree, t_exec *ex, int *in, int *out)
 {
@@ -46,7 +46,7 @@ int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 				|| access(r, R_OK) != 0))
 			return (redir_errors(ex->shell, r, "Permission denied"), 0);
 		tmp_fd = open_files(tree, ex, 1, r);
-		if (tmp_fd < 0 && !ex->shell->status)
+		if (tmp_fd < 0 && !ex->shell->status && ft_strcmp(tree->content, "<<"))
 			return (redir_errors(ex->shell, r, "No such file or directory"), 0);
 		assign_fd(ex, in, 0, tmp_fd);
 	}
@@ -60,6 +60,28 @@ int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 		assign_fd(ex, out, 1, tmp_fd);
 	}
 	return (1);
+}
+
+int	open_files(t_tree *tree, t_exec *ex, int count, char *cont)
+{
+	int	tmp_fd;
+
+	tmp_fd = 0;
+	if (count == 1)
+	{
+		if (ft_strcmp(tree->content, "<<") == 0)
+			tmp_fd = manage_heredoc(tree, ex);
+		else
+			tmp_fd = open(cont, O_RDONLY);
+	}
+	else if (count == 2)
+	{
+		if (ft_strcmp(tree->content, ">>") == 0)
+			tmp_fd = open(cont, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else
+			tmp_fd = open(cont, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
+	return (tmp_fd);
 }
 
 void	assign_fd(t_exec *ex, int *fd_count, int in_out, int tmp_fd)
@@ -78,43 +100,4 @@ void	assign_fd(t_exec *ex, int *fd_count, int in_out, int tmp_fd)
 		else
 			close(tmp_fd);
 	}
-}
-
-int	manage_heredoc(t_tree *tree, t_exec *ex)
-{
-	int		pip[2];
-	char	*buff;
-
-	if (pipe(pip) < 0)
-		clear_exit(tree, ex, 1, "pipe");
-	buff = NULL;
-	while (ft_strcmp(buff, tree->right->content) != 0)
-	{
-		if (buff)
-		{
-			buff = expand_buff(buff, pip, ex);
-			if (write(pip[1], buff, ft_strlen(buff)) < 0
-				|| write(pip[1], "\n", 1) < 0)
-				return (free(buff), close_fds(pip),
-					clear_exit(tree, ex, 1, "write"), -1);
-			free(buff);
-		}
-		buff = readline("> ");
-		if (!buff)
-			return (ex->shell->status = 130, close(pip[1]), free(buff), -1);
-	}
-	close(pip[1]);
-	return (free(buff), pip[0]);
-}
-
-char	*expand_buff(char *buff, int pip[2], t_exec *ex)
-{
-	char	*expanded;
-
-	expanded = expand(buff, ex->shell, 0);
-	free(buff);
-	if (!expanded)
-		return (close_fds(pip),
-			clear_exit(ex->tree, ex, 1, "expand"), NULL);
-	return (expanded);
 }

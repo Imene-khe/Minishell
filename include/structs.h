@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:15:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 14:48:41 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 13:55:22 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_history
 	char				*command;
 	struct s_history	*next;
 }						t_history;
+
+typedef struct s_heredoc
+{
+	int		pip[2];
+	void	(*old_sigint)(int);
+	void	(*old_sigquit)(int);
+}			t_heredoc;
 
 typedef struct s_exec
 {
