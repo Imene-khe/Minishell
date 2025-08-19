@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 12:37:14 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:34:08 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,10 @@ void	cmnd_errors(char *cmnd, int count, int code, t_exec *ex)
 
 void	cd_errors(t_shell *shell, char *file, int cwd)
 {
+	shell->status = 1;
 	ft_putstr_fd("minishishishi: cd: ", 2);
 	if (cwd == 1)
-		ft_putstr_fd("error retrieving current directory\n", 2);
+		ft_putstr_fd("error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);
 	else if (!file)
 		ft_putstr_fd("too many arguments\n", 2);
 	else
@@ -101,8 +102,11 @@ void	cd_errors(t_shell *shell, char *file, int cwd)
 		ft_putstr_fd(file, 2);
 		if (cwd == 2)
 			ft_putstr_fd(" : not set\n", 2);
+		else if (cwd == 3)
+			ft_putstr_fd(" : Not a directory\n", 2);
+		else if (cwd == 4)
+			ft_putstr_fd(" : no option managed\n", 2);
 		else
 			ft_putstr_fd(" : No such file or directory\n", 2);
 	}
-	shell->status = 1;
 }

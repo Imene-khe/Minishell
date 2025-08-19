@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:23:15 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 14:22:50 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 17:50:32 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,16 @@ int	line_size(t_line *line)
 		size++;
 	}
 	return (size);
+}
+
+t_line	*line_last(t_line *head)
+{
+	t_line	*current;
+
+	if (!head)
+		return (NULL);
+	current = head;
+	while (current->next)
+		current = current->next;
+	return (current);
 }

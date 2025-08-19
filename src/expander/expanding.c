@@ -6,17 +6,17 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:51 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 23:20:54 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:11:56 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-int		expand_verify(char *str, int *i, int *mode);
+int		expand_verify(char *str, int *i, int *mode, t_line *line);
 char	*replacing(char *expanded, char *str, int *i, t_shell *shell);
 int		is_quoted(char *s, int i, int type, t_shell *shell);
 
-char	*expand(char *str, t_shell *shell, int mode)
+char	*expand(char *str, t_shell *shell, t_line *line, int mode)
 {
 	char	*expanded;
 	int		i;
@@ -29,7 +29,7 @@ char	*expand(char *str, t_shell *shell, int mode)
 	j = 0;
 	while (str[i])
 	{
-		if (expand_verify(str, &i, &mode))
+		if (expand_verify(str, &i, &mode, line))
 		{
 			is_quoted(str, i, 2, shell);
 			expanded = replacing(expanded, str, &i, shell);
@@ -57,8 +57,13 @@ char	*replacing(char *expanded, char *str, int *i, t_shell *shell)
 	return (expanded);
 }
 
-int	expand_verify(char *str, int *i, int *mode)
+int	expand_verify(char *str, int *i, int *mode, t_line *line)
 {
+	t_line	*last;
+
+	last = line_last(line);
+	if (last && last->type == REDIR_IN && !ft_strcmp(last->content, "<<"))
+		return (0);
 	if (!change_mode(str[*i], mode) && str[*i] == '$')
 	{
 		if (str[*i + 1] && is_quote(str[*i + 1]) && *mode == 0)

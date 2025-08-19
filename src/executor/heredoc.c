@@ -6,14 +6,14 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 12:13:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 16:35:56 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:13:33 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
 void	heredoc_loop(char *buff, t_heredoc *hd, t_exec *ex);
-int		verify_heredoc(t_exec *ex, char *buff, t_heredoc *hd);
+int		verify_heredoc(t_exec *ex, char **buff, t_heredoc *hd);
 char	*expand_buff(char *buff, int pip[2], t_exec *ex);
 
 int	manage_heredoc(t_tree *tree, t_exec *ex)
@@ -34,7 +34,7 @@ int	manage_heredoc(t_tree *tree, t_exec *ex)
 	{
 		if (buff)
 			heredoc_loop(buff, hd, ex);
-		if (verify_heredoc(ex, buff, hd) < 0)
+		if (verify_heredoc(ex, &buff, hd) < 0)
 			return (-1);
 	}
 	restore_signals(hd->old_sigint, hd->old_sigquit);
@@ -53,10 +53,10 @@ void	heredoc_loop(char *buff, t_heredoc *hd, t_exec *ex)
 	free(buff);
 }
 
-int	verify_heredoc(t_exec *ex, char *buff, t_heredoc *hd)
+int	verify_heredoc(t_exec *ex, char **buff, t_heredoc *hd)
 {
-	buff = readline("> ");
-	if (!buff)
+	*buff = readline("> ");
+	if (!*buff)
 	{
 		close_fds(hd->pip);
 		restore_signals(hd->old_sigint, hd->old_sigquit);
@@ -66,8 +66,8 @@ int	verify_heredoc(t_exec *ex, char *buff, t_heredoc *hd)
 	}
 	if (g_signal == SIGINT || g_signal == SIGQUIT)
 	{
-		if (buff)
-			free(buff);
+		if (*buff)
+			free(*buff);
 		ex->shell->status = 130;
 		if (g_signal == SIGQUIT)
 		{
@@ -83,7 +83,7 @@ char	*expand_buff(char *buff, int pip[2], t_exec *ex)
 {
 	char	*expanded;
 
-	expanded = expand(buff, ex->shell, 0);
+	expanded = expand(buff, ex->shell, NULL, 0);
 	free(buff);
 	if (!expanded)
 		return (close_fds(pip),

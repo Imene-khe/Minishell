@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:52:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 12:31:03 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 17:14:16 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,16 @@ int	exec(t_tree *tree, t_exec *ex, int count, int *run)
 			if (!verify_fds(ex))
 				return (0);
 		if (ex->need_pipe)
-			set_fds(ex, count);
+			set_fds(ex, tree, count);
 	}
-	else
-		*run = 1;
+	*run = 1;
 	curr = tree;
 	while (curr && curr->type != CMD)
 		curr = curr->left;
 	if (curr)
 		return (exec_cmd(curr, ex, count, run));
+	if (ex->need_fork)
+		clear_exit(ex->tree, ex, 0, "exec");
 	return (0);
 }
 
