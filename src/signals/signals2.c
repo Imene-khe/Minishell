@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: ikhelil <ikhelil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/14 19:04:04 by ikhelil           #+#    #+#             */
-/*   Updated: 2025/08/18 17:11:42 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 18:03:57 by ikhelil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,23 @@ void	parent_exec_signals_end(void)
 	setup_signals_interactive();
 }
 
-void sigint_heredoc(int signo)
+void	sigint_heredoc(int signo)
 {
-    (void)signo;
-    write(1, "\n", 1);
-    exit(130);
+	(void)signo;
+	write(1, "\n", 1);
+	exit(130);
 }
 
 void	sigquit_heredoc(int signo)
 {
-	(void) signo;
+	(void)signo;
+	write(1, "Quit (core dumped)\n", 19);
+	exit(131);
 }
 
-void	setup_signals_heredoc(void(**old_sigint)(int), void(**old_sigquit)(int))
+void	setup_signals_heredoc(
+		void (**old_sigint)(int), void (**old_sigquit)(int))
 {
 	*old_sigint = signal(SIGINT, sigint_heredoc);
 	*old_sigquit = signal(SIGQUIT, sigquit_heredoc);
-}
-
-void	restore_signals(void (*old_sigint)(int), void (*old_sigquit)(int))
-{
-	signal(SIGINT, old_sigint);
-	signal(SIGQUIT, old_sigquit);
 }

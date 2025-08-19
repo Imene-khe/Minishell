@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
+/*   By: ikhelil <ikhelil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 14:14:52 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 17:12:05 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 17:54:06 by ikhelil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 # include "../../include/structs.h"
+# include "../../include/minishell.h"
 
 extern int	g_signal;
 
@@ -34,7 +35,10 @@ void	parent_exec_signals_begin(void);
 void	parent_exec_signals_end(void);
 void	sigint_heredoc(int signo);
 void	sigquit_heredoc(int signo);
-void	setup_signals_heredoc(void(**old_sigint)(int), void(**old_sigquit)(int));
+void	setup_signals_heredoc(
+			void (**old_sigint)(int), void (**old_sigquit)(int));
 void	restore_signals(void (*old_sigint)(int), void (*old_sigquit)(int));
+void	print_heredoc_warning(char *delim);
+int		handle_check(int check);
 
 #endif
