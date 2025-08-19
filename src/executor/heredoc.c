@@ -52,32 +52,36 @@ void	heredoc_loop(char *buff, t_heredoc *hd, t_exec *ex)
 			clear_exit(ex->tree, ex, 500, "write"));
 	free(buff);
 }
-
 int	verify_heredoc(t_exec *ex, char *buff, t_heredoc *hd)
 {
 	buff = readline("> ");
 	if (!buff)
 	{
+		if (g_signal == SIGINT)
+		{
+			ex->shell->status = 130;
+			restore_signals(hd->old_sigint, hd->old_sigquit);
+			close_fds(hd->pip);
+			free(hd);
+			return (-1);
+		}
 		close_fds(hd->pip);
 		restore_signals(hd->old_sigint, hd->old_sigquit);
 		free(hd);
 		clear_exit(ex->tree, ex, 0, "Heredoc");
 		return (-1);
 	}
-	if (g_signal == SIGINT || g_signal == SIGQUIT)
+	if (g_signal == SIGQUIT)
 	{
-		if (buff)
-			free(buff);
-		ex->shell->status = 130;
-		if (g_signal == SIGQUIT)
-		{
-			ex->shell->status = 0;
-		}
+		free(buff);
+		ex->shell->status = 0;
 		restore_signals(hd->old_sigint, hd->old_sigquit);
-		return (close_fds(hd->pip), free(hd), free(buff), -1);
+		return (close_fds(hd->pip), free(hd), -1);
 	}
 	return (0);
 }
+
+
 
 char	*expand_buff(char *buff, int pip[2], t_exec *ex)
 {

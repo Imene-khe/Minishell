@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "signals.h"
+#include <stdlib.h>
 
 void	parent_exec_signals_begin(void)
 {
@@ -23,12 +24,11 @@ void	parent_exec_signals_end(void)
 	setup_signals_interactive();
 }
 
-void	sigint_heredoc(int signo)
+void sigint_heredoc(int signo)
 {
-	(void) signo;
-	g_signal = SIGINT;
-	write(1, "\n", 1);
-	close(0);
+    (void)signo;
+    write(1, "\n", 1);
+    exit(130);
 }
 
 void	sigquit_heredoc(int signo)
