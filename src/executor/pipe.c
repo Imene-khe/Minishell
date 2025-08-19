@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 16:34:36 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/16 12:58:22 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 17:06:43 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	reset_pipe(t_exec *ex, int count)
 	}
 }
 
-void	set_fds(t_exec *ex, int count)
+void	set_fds(t_exec *ex, t_tree *tree, int count)
 {
-	if (count == 0 && ex->write_fd == 1)
+	if (count == 0 && (ex->write_fd == 1 || count_elm(tree, CMD) == 0))
 	{
 		close(ex->pipe1[0]);
 		close_fds(ex->pipe2);
@@ -51,7 +51,7 @@ void	set_fds(t_exec *ex, int count)
 	}
 	else if (count % 2 != 0)
 		pair_pipe(ex, count, ex->pipe1, ex->pipe2);
-	else
+	else if (count % 2 == 0)
 		pair_pipe(ex, count, ex->pipe2, ex->pipe1);
 }
 
@@ -63,7 +63,7 @@ void	pair_pipe(t_exec *ex, int count, int pipe1[2], int pipe2[2])
 	else
 		close(pipe1[0]);
 	close(pipe2[0]);
-	if (ex->write_fd == 1 && count != count_elm(ex->tree, CMD) - 1)
+	if (ex->write_fd == 1 && count != count_elm(ex->tree, PIPE))
 		ex->write_fd = pipe2[1];
 	else
 		close(pipe2[1]);

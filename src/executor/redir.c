@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 12:13:31 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 16:19:15 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 13:39:46 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int	opening(t_tree *tree, t_exec *ex, int *in, int *out)
 	r = tree->right->content;
 	if (tree->type == REDIR_IN)
 	{
-		if (ft_strcmp(tree->content, "<<") && (access(r, F_OK) != 0
-				|| access(r, R_OK) != 0))
+		if (ft_strcmp(tree->content, "<<") && !access(r, F_OK)
+				&& access(r, R_OK) != 0)
 			return (redir_errors(ex->shell, r, "Permission denied"), 0);
 		tmp_fd = open_files(tree, ex, 1, r);
 		if (tmp_fd < 0 && !ex->shell->status && ft_strcmp(tree->content, "<<"))

@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:36 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/09 16:22:08 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:45:21 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	export_args(t_tree *args, t_shell *shell, t_exec *ex);
 
 // Built Tools
 int		cd_verify(t_tree *args);
+int		change_directory(t_exec *ex, char *old, char *var);
 
 #endif

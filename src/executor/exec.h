@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:53:05 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 12:32:25 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 16:27:39 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		manage_heredoc(t_tree *tree, t_exec *ex);
 // Pipe
 void	manage_pipes(t_tree *tree, t_exec *ex, int *run);
 void	reset_pipe(t_exec *ex, int which);
-void	set_fds(t_exec *ex, int count);
+void	set_fds(t_exec *ex, t_tree *tree, int count);
 void	pair_pipe(t_exec *ex, int count, int pipe1[2], int pipe2[2]);
 
 // Execution

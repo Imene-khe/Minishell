@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 16:12:58 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/12 16:20:09 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/19 17:49:01 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../../include/minishell.h"
 
-char	*expand(char *str, t_shell *shell, int mode);
+char	*expand(char *str, t_shell *shell, t_line *line, int mode);
 
 int		till_sep(char *str);
 int		change_mode(char c, int *mode);

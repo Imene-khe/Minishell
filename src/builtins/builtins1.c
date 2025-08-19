@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 20:18:42 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/18 19:24:41 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	cd_next(t_tree *args, t_exec *ex, char *old);
+int	cd_next(t_tree *args, t_exec *ex, char *old);
 
 int	builtins(t_tree *tree, t_exec *ex, int count, int *run)
 {
@@ -75,22 +75,22 @@ void	pwd(t_exec *ex, t_tree *arg)
 		ft_putstr_fd(": invalid option\n", 2);
 		return ;
 	}
-	buff = malloc(PATH_SIZE);
-	if (!buff)
-		clear_exit(ex->tree, ex, 1, "pwd");
+	buff = NULL;
 	buff = getcwd(buff, PATH_SIZE);
 	if (!buff)
-		return (free(buff), ex->shell->status = 1,
-			ft_putstr_fd("pwd: error retrieving current directory.\n", 2));
-	printf("%s\n", buff);
+	{
+		ft_putstr_fd("pwd: error retrieving current directory.\n", 2);
+		ex->shell->status = 1;
+	}
+	else
+		printf("%s\n", buff);
 	free(buff);
-	ex->shell->status = 0;
 }
 
 void	cd(t_tree *args, t_exec *ex)
 {
 	char	*old;
-	char	*val;
+	char	*new;
 
 	ex->shell->status = 0;
 	if (count_elm(args, ARG) > 1)
@@ -99,27 +99,8 @@ void	cd(t_tree *args, t_exec *ex)
 	old = getcwd(old, PATH_SIZE);
 	if (!old)
 		return (cd_errors(ex->shell, NULL, 1));
-	if (cd_verify(args))
-	{
-		val = ft_getenv(ex->shell->envp, "HOME");
-		if (!val || chdir(val) == -1)
-			return (free(old), cd_errors(ex->shell, "HOME", 2));
-	}
-	else if (count_elm(args, ARG) == 1 && !ft_strcmp(args->content, "-"))
-	{
-		val = ft_getenv(ex->shell->envp, "OLDPWD");
-		if (!val || chdir(val) == -1)
-			return (free(old), cd_errors(ex->shell, "OLDPWD", 2));
-	}
-	else if (chdir(args->content) == -1)
-		return (free(old), cd_errors(ex->shell, args->content, 0));
-	cd_next(args, ex, old);
-}
-
-void	cd_next(t_tree *args, t_exec *ex, char *old)
-{
-	char	*new;
-
+	if (cd_next(args, ex, old) < 0)
+		return ;
 	new = NULL;
 	new = getcwd(new, PATH_SIZE);
 	if (!new)
@@ -128,4 +109,21 @@ void	cd_next(t_tree *args, t_exec *ex, char *old)
 		printf("%s\n", new);
 	modify_var(ex, "OLDPWD", old, new);
 	modify_var(ex, "PWD", new, NULL);
+}
+
+int	cd_next(t_tree *args, t_exec *ex, char *old)
+{
+	struct stat	st;
+
+	if (args && args->content && args->content[0] == '-' && ft_strlen(args->content) > 1)
+		return (cd_errors(ex->shell, args->content, 4), -1);
+	if (cd_verify(args))
+		return (change_directory(ex, old, "HOME"));
+	else if (count_elm(args, ARG) == 1 && !ft_strcmp(args->content, "-"))
+		return (change_directory(ex, old, "OLDPWD"));
+	else if (stat(args->content, &st) >= 0 && !S_ISDIR(st.st_mode))
+		cd_errors(ex->shell, args->content, 3);
+	else if (chdir(args->content) == -1)
+		return (free(old), cd_errors(ex->shell, args->content, 0), -1);
+	return (0);
 }
