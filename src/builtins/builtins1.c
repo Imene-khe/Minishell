@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 15:48:42 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 19:24:41 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:10:42 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ int	cd_next(t_tree *args, t_exec *ex, char *old)
 {
 	struct stat	st;
 
-	if (args && args->content && args->content[0] == '-' && ft_strlen(args->content) > 1)
+	if (args && args->content && args->content[0] == '-'
+		&& ft_strlen(args->content) > 1)
 		return (cd_errors(ex->shell, args->content, 4), -1);
 	if (cd_verify(args))
 		return (change_directory(ex, old, "HOME"));

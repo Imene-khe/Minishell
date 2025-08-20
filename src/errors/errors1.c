@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:18 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 18:34:08 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:10:24 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	clear_exit(t_tree *tree, t_exec *ex, int code, char *source)
 {
-	if (code == 0)
+	if (code == 0 || code == 130)
 		code += 0;
 	else if (code == 1)
 		print_error("Malloc failed", source);
@@ -94,7 +94,11 @@ void	cd_errors(t_shell *shell, char *file, int cwd)
 	shell->status = 1;
 	ft_putstr_fd("minishishishi: cd: ", 2);
 	if (cwd == 1)
-		ft_putstr_fd("error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n", 2);
+	{
+		ft_putstr_fd("error retrieving current directory: ", 2);
+		ft_putstr_fd("getcwd: cannot access parent directories: ", 2);
+		ft_putstr_fd("No such file or directory\n", 2);
+	}
 	else if (!file)
 		ft_putstr_fd("too many arguments\n", 2);
 	else

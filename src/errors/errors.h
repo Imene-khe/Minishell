@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:44:10 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 15:24:38 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 11:42:48 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cd_errors(t_shell *shell, char *file, int cwd);
 void	exit_errors(char *arg, t_shell *shell);
 void	env_errors(t_shell *shell, char *arg);
 void	export_errors(t_shell *shell, char *arg);
-void	redir_errors(t_shell *shell, char *source, char *msg);
+void	redir_errors(t_tree *tree, t_shell *shell, char *source, char *msg);
 void	history_errors(t_shell *shell, char *source, int count);
 
 #endif

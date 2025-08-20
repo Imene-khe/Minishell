@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bguerrou <bguerrou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/09 16:25:47 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/17 20:19:44 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:08:11 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,18 @@ void	export_errors(t_shell *shell, char *arg)
 	}
 }
 
-void	redir_errors(t_shell *shell, char *source, char *msg)
+void	redir_errors(t_tree *tree, t_shell *shell, char *source, char *msg)
 {
+	if (!ft_strcmp(tree->content, "<<"))
+		return ;
 	shell->status = 1;
 	ft_putstr_fd("minishishishi: ", 2);
 	ft_putstr_fd(source, 2);
 	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(msg, 2);
+	if (msg)
+		ft_putstr_fd(msg, 2);
+	else
+		ft_putstr_fd("No such file or directory\n", 2);
 	ft_putstr_fd("\n", 2);
 }
 

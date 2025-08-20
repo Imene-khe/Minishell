@@ -6,7 +6,7 @@
 /*   By: bguerrou <boualemguerroumi21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 13:15:59 by bguerrou          #+#    #+#             */
-/*   Updated: 2025/08/18 13:55:22 by bguerrou         ###   ########.fr       */
+/*   Updated: 2025/08/20 12:00:08 by bguerrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_heredoc
 	int		pip[2];
 	void	(*old_sigint)(int);
 	void	(*old_sigquit)(int);
+	int		backup;
 }			t_heredoc;
 
 typedef struct s_exec
